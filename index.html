@@ -1,617 +1,219 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="system">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Marvin Lirio — Quality engineering, technical compliance, and AI-assisted development portfolio."
+    >
 
     <title>Marvin Lirio | Resume & Portfolio</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0f1115;
-            color: #f5f5f5;
-            line-height: 1.6;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .container {
-            width: min(1100px, 90%);
-            margin: 0 auto;
-        }
-
-        /* NAVIGATION */
-
-        nav {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(15, 17, 21, 0.96);
-            border-bottom: 1px solid #232833;
-        }
-
-        .nav-inner {
-            min-height: 70px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .brand {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .nav-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 22px;
-        }
-
-        .nav-links a {
-            color: #b6bcc8;
-            transition: 0.2s ease;
-        }
-
-        .nav-links a:hover {
-            color: #ffffff;
-        }
-
-        /* HERO */
-
-        .profile-hero {
-            min-height: 82vh;
-            display: flex;
-            align-items: center;
-            padding: 100px 0;
-        }
-
-        .profile-hero-grid {
-            display: grid;
-            grid-template-columns: 1.5fr 0.8fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .profile-intro {
-            text-align: left;
-        }
-
-        .profile-label {
-            display: inline-block;
-            margin-bottom: 22px;
-            color: #8f98a8;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .profile-name {
-            margin: 0 0 14px;
-            font-size: clamp(54px, 7vw, 92px);
-            line-height: 0.95;
-            letter-spacing: -3px;
-            white-space: nowrap;
-        }
-
-        .profile-role {
-            margin-bottom: 28px;
-            color: #d1d5db;
-            font-size: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        .profile-description {
-            max-width: 700px;
-            margin: 0;
-            color: #aeb5c0;
-            font-size: 19px;
-            line-height: 1.75;
-        }
-
-        .profile-actions {
-            display: flex;
-            gap: 14px;
-            margin-top: 34px;
-        }
-
-        .primary-button,
-        .secondary-button {
-            display: inline-block;
-            padding: 12px 20px;
-            border-radius: 8px;
-            transition: 0.2s ease;
-        }
-
-        .primary-button {
-            border: 1px solid #343b49;
-            color: #f5f5f5;
-        }
-
-        .secondary-button {
-            border: 1px solid #343b49;
-            color: #f5f5f5;
-        }
-
-        .primary-button:hover,
-        .secondary-button:hover {
-            transform: translateY(-2px);
-        }
-
-        .primary-button:hover {
-            border-color: #697384;
-        }
-
-        .secondary-button:hover {
-            border-color: #697384;
-        }
-
-        .profile-summary {
-            background: #15181f;
-            border: 1px solid #2b313d;
-            border-radius: 14px;
-            padding: 8px 28px;
-        }
-
-        .summary-item {
-            padding: 24px 0;
-            border-bottom: 1px solid #2b313d;
-        }
-
-        .summary-item:last-child {
-            border-bottom: none;
-        }
-
-        .summary-label {
-            margin-bottom: 5px;
-            color: #737c8b;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .summary-value {
-            color: #f5f5f5;
-            font-size: 17px;
-        }
-
-        /* GENERAL SECTIONS */
-
-        section {
-            padding: 100px 0;
-            border-top: 1px solid #202530;
-        }
-
-        .section-label {
-            color: #8f98a8;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 13px;
-            margin-bottom: 12px;
-            text-align: center;
-        }
-
-        h2 {
-            font-size: 40px;
-            margin: 0 0 24px;
-            text-align: center;
-        }
-
-        .section-copy {
-            max-width: 820px;
-            margin: 0 auto;
-            color: #b6bcc8;
-            font-size: 18px;
-            text-align: center;
-        }
-
-        .section-copy + .section-copy {
-            margin-top: 18px;
-        }
-
-        /* EXPERIENCE */
-
-        .experience-grid {
-            display: grid;
-            gap: 28px;
-            margin-top: 45px;
-        }
-
-        .company-card {
-            background: #15181f;
-            border: 1px solid #2b313d;
-            border-radius: 12px;
-            padding: 32px;
-        }
-
-        .company-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 30px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid #2b313d;
-        }
-
-        .company-header h3 {
-            margin: 0;
-            font-size: 25px;
-        }
-
-        .company-note {
-            color: #8f98a8;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .company-years {
-            color: #aab2bf;
-            font-size: 15px;
-            white-space: nowrap;
-        }
-
-        .role {
-            padding: 28px 0;
-            border-bottom: 1px solid #252a34;
-        }
-
-        .role:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .role h4 {
-            margin: 0 0 18px;
-            font-size: 20px;
-        }
-
-        .role ul {
-            margin: 0;
-            padding-left: 20px;
-            color: #9ea6b3;
-        }
-
-        .role li {
-            margin-bottom: 10px;
-        }
-
-        /* SKILLS */
-
-        .skills-heading {
-            margin-top: 80px;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 45px;
-        }
-
-        .skill-card {
-            background: #15181f;
-            border: 1px solid #2b313d;
-            border-radius: 12px;
-            padding: 26px;
-        }
-
-        .skill-card h3 {
-            margin-top: 0;
-        }
-
-        .skill-card p {
-            color: #9ea6b3;
-            margin-bottom: 0;
-        }
-
-        /* PROJECTS */
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 45px;
-        }
-
-        .project-card {
-            background: #15181f;
-            border: 1px solid #2b313d;
-            border-radius: 12px;
-            padding: 28px;
-            transition: 0.2s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-4px);
-            border-color: #4b5565;
-        }
-
-        .project-card h3 {
-            margin-top: 0;
-            font-size: 23px;
-        }
-
-        .project-card p {
-            color: #9ea6b3;
-        }
-
-        .button {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 12px 20px;
-            border: 1px solid #343b49;
-            border-radius: 8px;
-            transition: 0.2s ease;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
-            border-color: #5b6575;
-        }
-
-        .button-disabled {
-            cursor: default;
-            color: #8f98a8;
-        }
-
-        .button-disabled:hover {
-            transform: none;
-            border-color: #343b49;
-        }
-
-        /* CONTACT */
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 45px;
-        }
-
-        .contact-card {
-            background: #15181f;
-            border: 1px solid #2b313d;
-            border-radius: 12px;
-            padding: 24px;
-            text-align: center;
-        }
-
-        .contact-label {
-            color: #777f8d;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .contact-value {
-            color: #f5f5f5;
-        }
-
-        .contact-card a:hover {
-            color: #cbd1da;
-        }
-
-        /* BEYOND WORK */
-
-        .beyond-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 45px;
-        }
-
-        .beyond-card {
-            background: #15181f;
-            border: 1px solid #2b313d;
-            border-radius: 12px;
-            padding: 26px;
-        }
-
-        .beyond-card h3 {
-            margin-top: 0;
-        }
-
-        .beyond-card p {
-            color: #9ea6b3;
-            margin-bottom: 0;
-        }
-
-        /* FOOTER */
-
-        footer {
-            padding: 40px 0;
-            border-top: 1px solid #202530;
-            color: #747d8b;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        /* RESPONSIVE */
-
-        @media (max-width: 900px) {
-            .profile-hero {
-                min-height: auto;
-                padding: 80px 0;
-            }
-
-            .profile-hero-grid {
-                grid-template-columns: 1fr;
-                gap: 45px;
-            }
-
-            .profile-name {
-                font-size: clamp(48px, 13vw, 72px);
-                white-space: normal;
-                letter-spacing: -2px;
-            }
-
-            .profile-actions {
-                flex-wrap: wrap;
-            }
-
-            .nav-inner {
-                flex-direction: column;
-                gap: 12px;
-                padding: 16px 0;
-            }
-
-            .nav-links {
-                justify-content: center;
-            }
-
-            .skills-grid,
-            .projects-grid,
-            .contact-grid,
-            .beyond-grid {
-                grid-template-columns: 1fr;
-            }
-
-            h2 {
-                font-size: 34px;
-            }
-        }
-
-        @media (max-width: 700px) {
-            .company-header {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .company-years {
-                white-space: normal;
-            }
-
-            .profile-role {
-                font-size: 18px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-    <!-- NAVIGATION -->
-    <nav>
+    <!-- ======================================================
+         NAVIGATION
+    ======================================================= -->
 
-        <div class="container nav-inner">
+    <header class="site-header">
 
-            <div class="brand">
-                Resume / Portfolio
-            </div>
+        <div class="container nav-container">
 
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#experience">Experience / Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-                <a href="#beyond">Beyond Work</a>
+            <a href="#top" class="brand" aria-label="Marvin Lirio home">
+
+                <span class="brand-mark">ML</span>
+
+                <span class="brand-name">
+                    Marvin Lirio
+                </span>
+
+            </a>
+
+
+            <nav class="desktop-nav" aria-label="Primary navigation">
+
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#capabilities" class="nav-link">Capabilities</a>
+                <a href="#work" class="nav-link">Work</a>
+                <a href="#process" class="nav-link">Process</a>
+                <a href="#beyond" class="nav-link">Beyond</a>
+                <a href="#contact" class="nav-link">Contact</a>
+
+            </nav>
+
+
+            <div class="nav-actions">
+
+                <button
+                    class="theme-toggle"
+                    id="themeToggle"
+                    type="button"
+                    aria-label="Change color theme"
+                    title="Change color theme"
+                >
+                    <span class="theme-icon" aria-hidden="true">◐</span>
+                </button>
+
+
+                <button
+                    class="menu-toggle"
+                    id="menuToggle"
+                    type="button"
+                    aria-label="Open navigation"
+                    aria-expanded="false"
+                    aria-controls="mobileNav"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
             </div>
 
         </div>
 
-    </nav>
 
-    <main>
+        <nav
+            class="mobile-nav"
+            id="mobileNav"
+            aria-label="Mobile navigation"
+        >
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#capabilities">Capabilities</a>
+            <a href="#work">Work</a>
+            <a href="#process">Process</a>
+            <a href="#beyond">Beyond</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
-        <!-- HERO -->
-        <section class="profile-hero">
+    </header>
 
-            <div class="container profile-hero-grid">
 
-                <div class="profile-intro">
+    <main id="top">
 
-                    <div class="profile-label">
-                        Professional Profile
-                    </div>
+        <!-- ==================================================
+             HERO
+        =================================================== -->
 
-                    <h1 class="profile-name">
-                        Marvin Lirio
-                    </h1>
+        <section class="hero">
 
-                    <div class="profile-role">
-                        QA • Technical Compliance • Development
-                    </div>
+            <div class="hero-grid-bg" aria-hidden="true"></div>
 
-                    <p class="profile-description">
-                        Quality-driven technology professional with 10+ years
-                        of experience across software testing, technical
-                        compliance, certification and release delivery, now
-                        expanding that foundation into software development.
+            <div class="container hero-grid">
+
+                <div class="hero-content reveal">
+
+                    <p class="eyebrow">
+                        Quality Engineering → Development
                     </p>
 
-                    <div class="profile-actions">
+                    <h1>
+                        Marvin
+                        <span>Lirio.</span>
+                    </h1>
 
-                        <a href="#experience" class="primary-button">
+                    <p class="hero-role">
+                        Quality Engineering · Technical Compliance ·
+                        AI-Assisted Development
+                    </p>
+
+                    <p class="hero-copy">
+                        I spent the last decade understanding how software
+                        works, finding where it fails and helping teams deliver
+                        reliable products. Now I'm applying that foundation
+                        to building software.
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        <a href="#work" class="button button-primary">
+                            Explore My Work
+                            <span aria-hidden="true">↘</span>
+                        </a>
+
+                        <a href="#experience" class="button button-secondary">
                             View Experience
                         </a>
 
-                        <a href="#contact" class="secondary-button">
-                            Contact
-                        </a>
-
                     </div>
+
+
+<div class="current-status">
+
+    <span class="status-dot" aria-hidden="true"></span>
+
+    <div>
+
+        <span class="status-label">
+            Currently Building
+        </span>
+
+        <a href="#work">
+            Keizoku DevOps · Resume/Portfolio
+        </a>
+
+    </div>
+
+</div>
 
                 </div>
 
-                <aside class="profile-summary">
 
-                    <div class="summary-item">
+                <aside class="hero-stats reveal">
 
-                        <div class="summary-label">
-                            Experience
-                        </div>
+                    <div class="stat">
 
-                        <div class="summary-value">
-                            10+ Years
-                        </div>
+                        <strong>10+</strong>
 
-                    </div>
-
-                    <div class="summary-item">
-
-                        <div class="summary-label">
-                            Core Focus
-                        </div>
-
-                        <div class="summary-value">
-                            QA / Compliance / Development
-                        </div>
+                        <span>
+                            Years in technology
+                        </span>
 
                     </div>
 
-                    <div class="summary-item">
 
-                        <div class="summary-label">
-                            Background
-                        </div>
+                    <div class="stat">
 
-                        <div class="summary-value">
-                            Gaming & Enterprise Technology
-                        </div>
+                        <strong>12+</strong>
+
+                        <span>
+                            Product releases led through QA
+                        </span>
 
                     </div>
 
-                    <div class="summary-item">
 
-                        <div class="summary-label">
-                            Location
-                        </div>
+                    <div class="stat">
 
-                        <div class="summary-value">
-                            Las Vegas, NV
-                        </div>
+                        <strong>30+</strong>
+
+                        <span>
+                            Certified product contributions
+                        </span>
+
+                    </div>
+
+
+                    <div class="stat stat-text">
+
+                        <strong>QA → DEV</strong>
+
+                        <span>
+                            Building on a quality-first foundation
+                        </span>
 
                     </div>
 
@@ -621,270 +223,1179 @@
 
         </section>
 
-        <!-- ABOUT -->
-        <section id="about">
+
+ <!-- ==================================================
+     ABOUT
+=================================================== -->
+
+<section id="about" class="section">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <p class="section-number">
+                01 / About
+            </p>
+
+            <h2>
+                From testing software<br>
+                <span class="heading-muted">to building it.</span>
+            </h2>
+
+        </div>
+
+
+        <div class="about-layout">
+
+            <div class="about-story reveal">
+
+                <p class="about-intro">
+                    My career started with enterprise systems and evolved
+                    into software quality, certification and technical
+                    compliance.
+                </p>
+
+                <p>
+                    Across that progression, the common thread has been
+                    understanding how products work, where they can fail
+                    and what it takes to deliver them reliably.
+                </p>
+
+                <p>
+                    Today I'm extending that experience into development,
+                    building practical web and software projects while
+                    incorporating AI into my workflow for implementation,
+                    iteration and problem solving.
+                </p>
+
+                <p>
+                    I'm approaching development with the same mindset that
+                    shaped my work in QA: understand the requirements,
+                    understand how the system works, build intentionally,
+                    validate the behavior and improve what doesn't work.
+                </p>
+
+            </div>
+
+
+            <aside class="foundation-panel reveal">
+
+                <p class="mini-label">
+                    My Foundation
+                </p>
+
+                <div class="foundation-list">
+
+                    <div>
+                        <span>01</span>
+                        <strong>Requirements</strong>
+                    </div>
+
+                    <div>
+                        <span>02</span>
+                        <strong>Systems & Environments</strong>
+                    </div>
+
+                    <div>
+                        <span>03</span>
+                        <strong>Integration</strong>
+                    </div>
+
+                    <div>
+                        <span>04</span>
+                        <strong>Testing & Validation</strong>
+                    </div>
+
+                    <div>
+                        <span>05</span>
+                        <strong>Release Delivery</strong>
+                    </div>
+
+                    <div>
+                        <span>06</span>
+                        <strong>Technical Analysis</strong>
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     EXPERIENCE
+=================================================== -->
+
+<section id="experience" class="section section-alt">
+
+    <div class="container">
+
+        <div class="section-heading reveal">
+
+            <p class="section-number">
+                02 / Experience
+            </p>
+
+            <h2>
+                A career built around<br>
+                <span class="heading-muted">how software works.</span>
+            </h2>
+
+            <p class="section-description">
+                From enterprise systems and hands-on QA to certification
+                and technical compliance, each step expanded how I
+                understand the software lifecycle.
+            </p>
+
+        </div>
+
+
+        <!-- ==========================================
+             INTERACTIVE CAREER TIMELINE
+        =========================================== -->
+
+        <div
+            class="career-path reveal"
+            role="tablist"
+            aria-label="Professional experience timeline"
+        >
+
+            <div class="career-line" aria-hidden="true"></div>
+
+
+            <!-- DIAMOND -->
+
+            <button
+                class="career-stop"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="company-diamond"
+                id="tab-diamond"
+                data-company="diamond"
+            >
+
+                <span class="career-dot" aria-hidden="true"></span>
+
+                <span class="career-year">
+                    2014
+                </span>
+
+                <strong>
+                    Diamond Resorts
+                </strong>
+
+                <small>
+                    Enterprise Systems
+                </small>
+
+            </button>
+
+
+            <!-- BMM -->
+
+            <button
+                class="career-stop"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="company-bmm"
+                id="tab-bmm"
+                data-company="bmm"
+            >
+
+                <span class="career-dot" aria-hidden="true"></span>
+
+                <span class="career-year">
+                    2018
+                </span>
+
+                <strong>
+                    BMM Testlabs
+                </strong>
+
+                <small>
+                    Testing & Certification
+                </small>
+
+            </button>
+
+
+            <!-- ARISTOCRAT -->
+
+            <button
+                class="career-stop"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="company-aristocrat"
+                id="tab-aristocrat"
+                data-company="aristocrat"
+            >
+
+                <span class="career-dot" aria-hidden="true"></span>
+
+                <span class="career-year">
+                    2021
+                </span>
+
+                <strong>
+                    Aristocrat
+                </strong>
+
+                <small>
+                    QA & Technical Compliance
+                </small>
+
+            </button>
+
+        </div>
+
+
+        <!-- ==========================================
+             COMPANY DISPLAY
+        =========================================== -->
+
+        <div class="company-display reveal">
+
+
+            <!-- ======================================
+                 ARISTOCRAT
+            ======================================= -->
+
+            <article
+                class="company-panel hidden"
+                id="company-aristocrat"
+                role="tabpanel"
+                aria-labelledby="tab-aristocrat"
+                data-company-panel="aristocrat"
+            >
+
+                <header class="company-card-header">
+
+                    <div class="company-identity">
+
+                        <p class="company-period">
+                            2021 — 2026
+                        </p>
+
+                        <h3>
+                            Aristocrat Technologies
+                        </h3>
+
+                        <p>
+                            Progressed through three roles spanning software
+                            quality, release validation, certification and
+                            technical compliance.
+                        </p>
+
+                    </div>
+
+
+                    <div class="company-summary">
+
+                        <span>
+                            3 Roles
+                        </span>
+
+                        <span>
+                            QA → Compliance
+                        </span>
+
+                    </div>
+
+                </header>
+
+
+                <div class="roles-list">
+
+
+                    <!-- TECHNICAL COMPLIANCE -->
+
+                    <article class="role-item">
+
+                        <div class="role-summary">
+
+                            <div>
+
+                                <span class="role-label">
+                                    Latest Role
+                                </span>
+
+                                <h4>
+                                    Technical Compliance Analyst
+                                </h4>
+
+                                <p>
+                                    Technical requirements · Certification ·
+                                    Regulatory analysis
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                class="role-toggle"
+                                type="button"
+                                aria-expanded="false"
+                            >
+
+                                <span class="role-toggle-label">
+                                    View More
+                                </span>
+
+                                <span class="role-toggle-symbol">
+                                    +
+                                </span>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="role-details">
+
+                            <div class="role-details-inner">
+
+                                <ul>
+
+                                    <li>
+                                        Managed compliance and certification
+                                        activities across U.S. and international
+                                        gaming jurisdictions.
+                                    </li>
+
+                                    <li>
+                                        Interpreted technical and regulatory
+                                        requirements into actionable guidance
+                                        for engineering, QA, product and release
+                                        teams.
+                                    </li>
+
+                                    <li>
+                                        Reviewed product changes and technical
+                                        designs for certification impact,
+                                        regulatory risk and jurisdictional
+                                        requirements.
+                                    </li>
+
+                                    <li>
+                                        Worked directly with regulators and
+                                        independent test laboratories to resolve
+                                        technical questions and support product
+                                        approval.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- SENIOR TEST ENGINEER -->
+
+                    <article class="role-item">
+
+                        <div class="role-summary">
+
+                            <div>
+
+                                <span class="role-label">
+                                    QA Leadership
+                                </span>
+
+                                <h4>
+                                    Senior Test Engineer
+                                </h4>
+
+                                <p>
+                                    Test strategy · Windows/Linux ·
+                                    Release validation
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                class="role-toggle"
+                                type="button"
+                                aria-expanded="false"
+                            >
+
+                                <span class="role-toggle-label">
+                                    View More
+                                </span>
+
+                                <span class="role-toggle-symbol">
+                                    +
+                                </span>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="role-details">
+
+                            <div class="role-details-inner">
+
+                                <ul>
+
+                                    <li>
+                                        Led QA and certification readiness
+                                        for 12+ product releases across
+                                        Windows and Linux environments.
+                                    </li>
+
+                                    <li>
+                                        Developed test strategies, assessed
+                                        product risk and provided release
+                                        recommendations.
+                                    </li>
+
+                                    <li>
+                                        Managed build deployment, environment
+                                        configuration, integration testing
+                                        and release validation using
+                                        PowerShell and MobaXterm.
+                                    </li>
+
+                                    <li>
+                                        Led certification bundles containing
+                                        up to 24 game titles while
+                                        coordinating testing and issue
+                                        resolution.
+                                    </li>
+
+                                    <li>
+                                        Supported certification and
+                                        regulatory approval for 20+
+                                        regulated products while mentoring
+                                        junior engineers.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- QUALITY ANALYST -->
+
+                    <article class="role-item">
+
+                        <div class="role-summary">
+
+                            <div>
+
+                                <span class="role-label">
+                                    Foundation
+                                </span>
+
+                                <h4>
+                                    Quality Analyst Engineer I
+                                </h4>
+
+                                <p>
+                                    Integration · Regression ·
+                                    Test environments
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                class="role-toggle"
+                                type="button"
+                                aria-expanded="false"
+                            >
+
+                                <span class="role-toggle-label">
+                                    View More
+                                </span>
+
+                                <span class="role-toggle-symbol">
+                                    +
+                                </span>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="role-details">
+
+                            <div class="role-details-inner">
+
+                                <ul>
+
+                                    <li>
+                                        Executed integration, regression and
+                                        certification testing across regulated
+                                        gaming products and embedded systems.
+                                    </li>
+
+                                    <li>
+                                        Built and maintained Windows/Linux
+                                        test environments and server-based
+                                        platforms supporting product
+                                        validation.
+                                    </li>
+
+                                    <li>
+                                        Supported software deployments,
+                                        release validation, defect investigation
+                                        and root cause analysis.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </article>
+
+
+            <!-- ======================================
+                 BMM
+            ======================================= -->
+
+            <article
+                class="company-panel"
+                id="company-bmm"
+                role="tabpanel"
+                aria-labelledby="tab-bmm"
+                data-company-panel="bmm"
+                hidden
+            >
+
+                <header class="company-card-header">
+
+                    <div class="company-identity">
+
+                        <p class="company-period">
+                            2018 — 2021
+                        </p>
+
+                        <h3>
+                            BMM Testlabs
+                        </h3>
+
+                        <p>
+                            Testing and certification experience across
+                            gaming systems, software and peripherals,
+                            progressing to Senior Test Engineer.
+                        </p>
+
+                    </div>
+
+
+                    <div class="company-summary">
+
+                        <span>
+                            Testing
+                        </span>
+
+                        <span>
+                            Certification
+                        </span>
+
+                    </div>
+
+                </header>
+
+
+                <div class="roles-list">
+
+                    <article class="role-item">
+
+                        <div class="role-summary">
+
+                            <div>
+
+                                <span class="role-label">
+                                    Testing & Certification
+                                </span>
+
+                                <h4>
+                                    Senior Test Engineer
+                                </h4>
+
+                                <p>
+                                    Functional testing · Integration ·
+                                    Regulatory compliance
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                class="role-toggle"
+                                type="button"
+                                aria-expanded="false"
+                            >
+
+                                <span class="role-toggle-label">
+                                    View More
+                                </span>
+
+                                <span class="role-toggle-symbol">
+                                    +
+                                </span>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="role-details">
+
+                            <div class="role-details-inner">
+
+                                <ul>
+
+                                    <li>
+                                        Conducted functional, integration
+                                        and regulatory compliance testing
+                                        across gaming systems, peripherals
+                                        and software products.
+                                    </li>
+
+                                    <li>
+                                        Supported certification testing
+                                        for suppliers including IGT,
+                                        Konami, Scientific Games and
+                                        Ainsworth.
+                                    </li>
+
+                                    <li>
+                                        Authored certification findings and
+                                        defect reports while coordinating
+                                        testing schedules, issue resolution
+                                        and approval timelines.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </article>
+
+
+            <!-- ======================================
+                 DIAMOND
+            ======================================= -->
+
+            <article
+                class="company-panel"
+                id="company-diamond"
+                role="tabpanel"
+                aria-labelledby="tab-diamond"
+                data-company-panel="diamond"
+                hidden
+            >
+
+                <header class="company-card-header">
+
+                    <div class="company-identity">
+
+                        <p class="company-period">
+                            2014 — 2018
+                        </p>
+
+                        <h3>
+                            Diamond Resorts International
+                        </h3>
+
+                        <p>
+                            Enterprise systems and user acceptance testing
+                            supporting business applications, deployments
+                            and software delivery.
+                        </p>
+
+                    </div>
+
+
+                    <div class="company-summary">
+
+                        <span>
+                            Enterprise
+                        </span>
+
+                        <span>
+                            UAT
+                        </span>
+
+                    </div>
+
+                </header>
+
+
+                <div class="roles-list">
+
+                    <article class="role-item">
+
+                        <div class="role-summary">
+
+                            <div>
+
+                                <span class="role-label">
+                                    Enterprise Systems
+                                </span>
+
+                                <h4>
+                                    System Analyst
+                                </h4>
+
+                                <p>
+                                    UAT · Requirements · Deployment support
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                class="role-toggle"
+                                type="button"
+                                aria-expanded="false"
+                            >
+
+                                <span class="role-toggle-label">
+                                    View More
+                                </span>
+
+                                <span class="role-toggle-symbol">
+                                    +
+                                </span>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="role-details">
+
+                            <div class="role-details-inner">
+
+                                <ul>
+
+                                    <li>
+                                        Led UAT for enterprise business
+                                        applications while partnering with
+                                        stakeholders and development teams.
+                                    </li>
+
+                                    <li>
+                                        Validated requirements and release
+                                        readiness across enterprise software.
+                                    </li>
+
+                                    <li>
+                                        Supported deployments, issue resolution,
+                                        documentation, training and process
+                                        improvement.
+                                    </li>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+        <!-- ==================================================
+             CAPABILITIES
+        =================================================== -->
+
+        <section id="capabilities" class="section">
 
             <div class="container">
 
-                <div class="section-label">
-                    About
+                <div class="section-heading reveal">
+
+                    <p class="section-number">
+                        03 / Capabilities
+                    </p>
+
+                    <h2>
+                        Established experience. Expanding toolkit.
+                    </h2>
+
+                    <p class="section-description">
+                        A clear distinction between capabilities developed
+                        professionally and technologies I'm actively building
+                        with today.
+                    </p>
+
                 </div>
 
-                <h2>
-                    From testing software to building it.
-                </h2>
 
-                <p class="section-copy">
-                    My career has been built around understanding how software
-                    works, finding where it fails and helping teams deliver
-                    reliable products. Over the past decade, I've worked across
-                    quality assurance, technical compliance, certification and
-                    enterprise systems in highly regulated environments.
-                </p>
+                <div class="capabilities-grid">
 
-                <p class="section-copy">
-                    That experience has shaped how I approach development today:
-                    understand the requirements, build intentionally, test
-                    thoroughly and continuously improve. Through Keizoku DevOps,
-                    I'm applying that foundation to software development, web
-                    projects, automation and AI-assisted engineering.
-                </p>
+                    <article class="capability-card reveal">
+
+                        <div class="capability-top">
+
+                            <span class="capability-number">
+                                01
+                            </span>
+
+                            <span class="experience-badge">
+                                Professional Experience
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Quality Engineering
+                        </h3>
+
+                        <div class="tag-list">
+
+                            <span>Test Strategy</span>
+                            <span>Integration Testing</span>
+                            <span>Regression Testing</span>
+                            <span>Release Validation</span>
+                            <span>Requirements Analysis</span>
+                            <span>Defect Investigation</span>
+                            <span>Root Cause Analysis</span>
+                            <span>UAT</span>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="capability-card reveal">
+
+                        <div class="capability-top">
+
+                            <span class="capability-number">
+                                02
+                            </span>
+
+                            <span class="experience-badge">
+                                Professional Experience
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Systems & Delivery
+                        </h3>
+
+                        <div class="tag-list">
+
+                            <span>Windows</span>
+                            <span>Linux</span>
+                            <span>RHEL</span>
+                            <span>CentOS</span>
+                            <span>PowerShell</span>
+                            <span>MobaXterm</span>
+                            <span>Server Configuration</span>
+                            <span>Embedded Systems</span>
+                            <span>SDLC</span>
+                            <span>Agile</span>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="capability-card reveal">
+
+                        <div class="capability-top">
+
+                            <span class="capability-number">
+                                03
+                            </span>
+
+                            <span class="experience-badge">
+                                Professional Experience
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Compliance & Product
+                        </h3>
+
+                        <div class="tag-list">
+
+                            <span>Technical Compliance</span>
+                            <span>Product Certification</span>
+                            <span>Regulatory Analysis</span>
+                            <span>Release Management</span>
+                            <span>Cross-Functional Delivery</span>
+                            <span>QA Leadership</span>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="capability-card development-card reveal">
+
+                        <div class="capability-top">
+
+                            <span class="capability-number">
+                                04
+                            </span>
+
+                            <span class="building-badge">
+                                Currently Building
+                            </span>
+
+                        </div>
+
+                        <h3>
+                            Development
+                        </h3>
+
+                        <div class="tag-list">
+
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>Git</span>
+                            <span>GitHub</span>
+                            <span>GitHub Pages</span>
+                            <span>Responsive Design</span>
+                            <span>AI-Assisted Development</span>
+
+                        </div>
+
+                    </article>
+
+                </div>
 
             </div>
 
         </section>
 
-        <!-- EXPERIENCE -->
-        <section id="experience">
+
+        <!-- ==================================================
+             WORK
+        =================================================== -->
+
+        <section id="work" class="section section-alt">
 
             <div class="container">
 
-                <div class="section-label">
-                    Experience
+                <div class="section-heading reveal">
+
+                    <p class="section-number">
+                        04 / Selected Work
+                    </p>
+
+<h2>
+    Development<br>
+    <span class="heading-muted">in practice.</span>
+</h2>
+
+<p class="section-description">
+    A growing collection of web, software and automation projects
+    where I'm applying my technical background to development.
+</p>
+
                 </div>
 
-                <h2>
-                    Professional background.
-                </h2>
 
-                <div class="experience-grid">
+                <div class="projects">
 
-                    <!-- ARISTOCRAT -->
-                    <article class="company-card">
+                    <!-- KEIZOKU -->
 
-                        <div class="company-header">
+                    <article class="project-featured reveal">
+
+                        <div class="project-meta">
 
                             <div>
 
+                                <span class="project-status active">
+                                    Active
+                                </span>
+
+                                <span>
+                                    2026
+                                </span>
+
+                            </div>
+
+                            <span class="project-index">
+                                Project / 01
+                            </span>
+
+                        </div>
+
+
+                        <div class="project-content">
+
+                            <div>
+
+<p class="project-type">
+    Independent Development Initiative
+</p>
+
                                 <h3>
-                                    Aristocrat Technologies, Inc.
+                                    Keizoku DevOps
                                 </h3>
 
-                                <div class="company-note">
-                                    Progressed through QA and Technical Compliance roles
+<p class="project-description">
+    An independent initiative focused on developing practical
+    experience across web development, software, automation and
+    AI-assisted engineering while applying a quality-first
+    approach to the development process.
+</p>
+
+
+                                <div class="project-stack">
+
+                                    <span>HTML</span>
+                                    <span>CSS</span>
+                                    <span>JavaScript</span>
+                                    <span>Git</span>
+                                    <span>GitHub Pages</span>
+
                                 </div>
 
                             </div>
 
-                            <div class="company-years">
-                                Nov 2021 – Sep 2026
+
+                            <div class="project-side">
+
+                                <div>
+
+                                    <span class="mini-label">
+                                        My Role
+                                    </span>
+
+                                    <p>
+                                        Product direction · Requirements ·
+                                        AI-assisted implementation · Review ·
+                                        Testing · Iteration · Deployment
+                                    </p>
+
+                                </div>
+
+
+                                <div class="project-links">
+
+                                    <a
+                                        href="https://marvin-lirio.github.io/hello-keizoku/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        Live Site ↗
+                                    </a>
+
+                                    <a
+                                        href="https://github.com/marvin-lirio/hello-keizoku"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        GitHub ↗
+                                    </a>
+
+                                </div>
+
                             </div>
-
-                        </div>
-
-                        <div class="role">
-
-                            <h4>
-                                Technical Compliance Analyst
-                            </h4>
-
-                            <ul>
-                                <li>
-                                    Manage compliance and certification activities
-                                    across U.S. and international gaming jurisdictions,
-                                    including direct engagement with regulators across
-                                    key markets.
-                                </li>
-
-                                <li>
-                                    Interpret regulatory and technical requirements
-                                    and translate them into actionable guidance for
-                                    engineering, QA, product and release teams.
-                                </li>
-
-                                <li>
-                                    Review product changes and technical designs for
-                                    regulatory risk, certification impact and
-                                    jurisdictional requirements.
-                                </li>
-
-                                <li>
-                                    Partner directly with regulators and independent
-                                    test laboratories to resolve technical questions
-                                    and support certification and product approval
-                                    activities.
-                                </li>
-                            </ul>
-
-                        </div>
-
-                        <div class="role">
-
-                            <h4>
-                                Senior Test Engineer
-                            </h4>
-
-                            <ul>
-                                <li>
-                                    Led QA and certification readiness for 12+ product
-                                    releases across Windows and Linux environments.
-                                </li>
-
-                                <li>
-                                    Developed test strategies, assessed product risk
-                                    and provided release recommendations.
-                                </li>
-
-                                <li>
-                                    Managed build deployment, environment configuration,
-                                    integration testing and release validation using
-                                    PowerShell and MobaXterm.
-                                </li>
-
-                                <li>
-                                    Led bundled certification submissions containing
-                                    up to 24 game titles while coordinating testing,
-                                    issue resolution and release readiness.
-                                </li>
-
-                                <li>
-                                    Supported certification and regulatory approval
-                                    for 20+ regulated products while mentoring junior
-                                    engineers and supporting complex defect
-                                    investigations.
-                                </li>
-                            </ul>
-
-                        </div>
-
-                        <div class="role">
-
-                            <h4>
-                                Quality Analyst Engineer I
-                            </h4>
-
-                            <ul>
-                                <li>
-                                    Executed integration, regression and certification
-                                    testing across regulated gaming products and
-                                    embedded systems.
-                                </li>
-
-                                <li>
-                                    Built and maintained Windows and Linux test
-                                    environments and server-based platforms supporting
-                                    product validation.
-                                </li>
-
-                                <li>
-                                    Supported software deployments, release validation,
-                                    defect investigation and root cause analysis.
-                                </li>
-                            </ul>
 
                         </div>
 
                     </article>
 
-                    <!-- BMM -->
-                    <article class="company-card">
+                    <!-- HORIZONTE -->
 
-                        <div class="company-header">
+                    <article class="project-featured project-muted reveal">
+
+                        <div class="project-meta">
 
                             <div>
 
+                                <span class="project-status development">
+                                    In Development
+                                </span>
+
+                            </div>
+
+                            <span class="project-index">
+                                Project / 02
+                            </span>
+
+                        </div>
+
+
+                        <div class="project-content">
+
+                            <div>
+
+                                <p class="project-type">
+                                    Web Enhancement
+                                </p>
+
                                 <h3>
-                                    BMM Testlabs
+                                    Horizonte
                                 </h3>
 
-                                <div class="company-note">
-                                    Promoted to Senior Test Engineer in 2021
+                                <p class="project-description">
+                                An upcoming website enhancement project 
+                                being developed through Keizoku DevOps. 
+                                Details will expand as the project develops.
+                                </p>
+
+                            </div>
+
+
+                            <div class="project-side">
+
+                                <div>
+
+                                    <span class="mini-label">
+                                        Status
+                                    </span>
+
+                                    <p>
+                                        Early development.
+                                    </p>
+
                                 </div>
 
                             </div>
-
-                            <div class="company-years">
-                                Nov 2018 – Nov 2021
-                            </div>
-
-                        </div>
-
-                        <div class="role">
-
-                            <h4>
-                                Senior Test Engineer
-                            </h4>
-
-                            <ul>
-                                <li>
-                                    Conducted functional, integration and regulatory
-                                    compliance testing across gaming systems,
-                                    peripherals and software products.
-                                </li>
-
-                                <li>
-                                    Supported certification testing for suppliers
-                                    including IGT, Konami, Scientific Games and
-                                    Ainsworth.
-                                </li>
-
-                                <li>
-                                    Authored certification findings and defect reports
-                                    while coordinating testing schedules, issue
-                                    resolution and approval timelines.
-                                </li>
-                            </ul>
-
-                        </div>
-
-                    </article>
-
-                    <!-- DIAMOND -->
-                    <article class="company-card">
-
-                        <div class="company-header">
-
-                            <div>
-                                <h3>
-                                    Diamond Resorts International
-                                </h3>
-                            </div>
-
-                            <div class="company-years">
-                                Nov 2014 – Nov 2018
-                            </div>
-
-                        </div>
-
-                        <div class="role">
-
-                            <h4>
-                                System Analyst
-                            </h4>
-
-                            <ul>
-                                <li>
-                                    Led UAT for enterprise business applications,
-                                    partnering with stakeholders and development teams
-                                    to validate requirements and release readiness.
-                                </li>
-
-                                <li>
-                                    Supported software deployments, issue resolution,
-                                    documentation, training and process improvement
-                                    initiatives.
-                                </li>
-                            </ul>
 
                         </div>
 
@@ -892,277 +1403,381 @@
 
                 </div>
 
-                <!-- SKILLS -->
-                <div class="skills-heading">
+            </div>
 
-                    <div class="section-label">
-                        Skills & Environments
-                    </div>
+        </section>
+
+
+        <!-- ==================================================
+             PROCESS
+        =================================================== -->
+
+        <section id="process" class="section">
+
+            <div class="container">
+
+                <div class="section-heading reveal">
+
+                    <p class="section-number">
+                        05 / Process
+                    </p>
 
                     <h2>
-                        Tools, testing and delivery.
+                        Built with intention.<br>
+                        <span class="heading-muted">Validated with experience.</span>
+                    </h2>
+
+                    <p class="section-description">
+                        My current development workflow combines AI-assisted
+                        implementation with the quality mindset I've developed
+                        professionally.
+                    </p>
+
+                </div>
+
+
+                <div class="process-grid">
+
+                    <article class="process-step reveal">
+
+                        <span>01</span>
+
+                        <h3>
+                            Define
+                        </h3>
+
+                        <p>
+                            Establish the problem, requirements, constraints
+                            and expected behavior before implementation.
+                        </p>
+
+                    </article>
+
+
+                    <article class="process-step reveal">
+
+                        <span>02</span>
+
+                        <h3>
+                            Direct
+                        </h3>
+
+                        <p>
+                            Use AI to accelerate implementation, explore
+                            approaches and translate requirements into
+                            working code.
+                        </p>
+
+                    </article>
+
+
+                    <article class="process-step reveal">
+
+                        <span>03</span>
+
+                        <h3>
+                            Understand
+                        </h3>
+
+                        <p>
+                            Review the structure and learn how the HTML,
+                            CSS, JavaScript and supporting components work
+                            together.
+                        </p>
+
+                    </article>
+
+
+                    <article class="process-step reveal">
+
+                        <span>04</span>
+
+                        <h3>
+                            Validate
+                        </h3>
+
+                        <p>
+                            Apply a QA mindset to functionality, responsive
+                            behavior, edge cases and user experience.
+                        </p>
+
+                    </article>
+
+
+                    <article class="process-step reveal">
+
+                        <span>05</span>
+
+                        <h3>
+                            Iterate
+                        </h3>
+
+                        <p>
+                            Identify gaps, refine requirements, troubleshoot
+                            issues and improve the implementation.
+                        </p>
+
+                    </article>
+
+
+                    <article class="process-step reveal">
+
+                        <span>06</span>
+
+                        <h3>
+                            Ship
+                        </h3>
+
+                        <p>
+                            Version changes through Git, deploy through
+                            GitHub and continue improving from a working
+                            baseline.
+                        </p>
+
+                    </article>
+
+                </div>
+
+
+                <div class="portfolio-note reveal">
+
+                    <div>
+
+                        <p class="section-number">
+                            This Portfolio Is Also A Project
+                        </p>
+
+                        <h3>
+                            Built through the same process.
+                        </h3>
+
+                    </div>
+
+
+                    <div class="portfolio-note-copy">
+
+                        <p>
+                            This site began as a static HTML resume and is
+                            evolving alongside my development skills.
+                            Portfolio V2 introduces separated HTML, CSS and
+                            JavaScript, responsive behavior, theme management
+                            and interactive UI.
+                        </p>
+
+                        <p>
+                            As my capabilities expand, the portfolio will
+                            continue evolving with them.
+                        </p>
+
+                        <a
+                            href="https://github.com/marvin-lirio/resume-portfolio"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-link"
+                        >
+                            View the repository ↗
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             BEYOND
+        =================================================== -->
+
+        <section id="beyond" class="section section-alt">
+
+            <div class="container">
+
+                <div class="section-heading reveal">
+
+                    <p class="section-number">
+                        06 / Beyond Work
+                    </p>
+
+                    <h2>
+                        Outside the terminal.
                     </h2>
 
                 </div>
 
-                <div class="skills-grid">
-
-                    <article class="skill-card">
-
-                        <h3>
-                            QA & Testing
-                        </h3>
-
-                        <p>
-                            Software Testing • Integration Testing • Regression
-                            Testing • Test Strategy • Release Validation •
-                            Requirements Analysis • Defect Investigation •
-                            Root Cause Analysis • UAT
-                        </p>
-
-                    </article>
-
-                    <article class="skill-card">
-
-                        <h3>
-                            Compliance & Delivery
-                        </h3>
-
-                        <p>
-                            Regulatory Compliance • Product Certification •
-                            QA Leadership • SDLC • Agile Methodologies •
-                            Cross-Functional Release Management
-                        </p>
-
-                    </article>
-
-                    <article class="skill-card">
-
-                        <h3>
-                            Tools & Environments
-                        </h3>
-
-                        <p>
-                            Windows • Linux • RHEL • CentOS • PowerShell •
-                            MobaXterm • Jira • Confluence • Zephyr • Salesforce •
-                            Dynamics 365 • Power BI • Manage2000 • Embedded
-                            Systems • Server Configuration
-                        </p>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- PROJECTS -->
-        <section id="projects">
-
-            <div class="container">
-
-                <div class="section-label">
-                    Projects
-                </div>
-
-                <h2>
-                    What I'm building.
-                </h2>
-
-                <p class="section-copy">
-                    Current development work focused on practical software,
-                    web projects and AI-assisted development workflows.
-                </p>
-
-                <div class="projects-grid">
-
-                    <article class="project-card">
-
-                        <h3>
-                            Keizoku DevOps
-                        </h3>
-
-                        <p>
-                            An independent development initiative focused on
-                            practical software, web development, automation and
-                            AI-assisted engineering with an emphasis on quality,
-                            validation and continuous improvement.
-                        </p>
-
-                        <a href="index.html" class="button">
-                            Visit Keizoku DevOps
-                        </a>
-
-                    </article>
-
-                    <article class="project-card">
-
-                        <h3>
-                            Horizonte
-                        </h3>
-
-                        <p>
-                            An upcoming website enhancement project currently
-                            in development under the Keizoku DevOps portfolio.
-                        </p>
-
-                        <span class="button button-disabled">
-                            In Development
-                        </span>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- CONTACT -->
-        <section id="contact">
-
-            <div class="container">
-
-                <div class="section-label">
-                    Contact
-                </div>
-
-                <h2>
-                    Let's connect.
-                </h2>
-
-                <div class="contact-grid">
-
-                    <article class="contact-card">
-
-                        <div class="contact-label">
-                            Email
-                        </div>
-
-                        <a
-                            href="mailto:marvin_lirio@ymail.com"
-                            class="contact-value"
-                        >
-                            marvin_lirio@ymail.com
-                        </a>
-
-                    </article>
-
-                    <article class="contact-card">
-
-                        <div class="contact-label">
-                            LinkedIn
-                        </div>
-
-                        <a
-                            href="https://linkedin.com/in/marvin-lirio-2117ab11a/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="contact-value"
-                        >
-                            LinkedIn Profile
-                        </a>
-
-                    </article>
-
-                    <article class="contact-card">
-
-                        <div class="contact-label">
-                            Keizoku DevOps
-                        </div>
-
-                        <a
-                            href="index.html"
-                            class="contact-value"
-                        >
-                            View Project
-                        </a>
-
-                    </article>
-
-                    <article class="contact-card">
-
-                        <div class="contact-label">
-                            Location
-                        </div>
-
-                        <div class="contact-value">
-                            Las Vegas, NV
-                        </div>
-
-                    </article>
-
-                </div>
-
-            </div>
-
-        </section>
-
-        <!-- BEYOND WORK -->
-        <section id="beyond">
-
-            <div class="container">
-
-                <div class="section-label">
-                    Beyond Work
-                </div>
-
-                <h2>
-                    Outside the terminal.
-                </h2>
-
-                <p class="section-copy">
-                    Technology is a major part of what I do, but not the only
-                    thing that keeps me moving.
-                </p>
 
                 <div class="beyond-grid">
 
-                    <article class="beyond-card">
+                    <article class="beyond-card reveal">
+
+                        <span class="beyond-number">
+                            01
+                        </span>
 
                         <h3>
-                            Endurance Sports
+                            Run / HYROX / Spartan
                         </h3>
 
                         <p>
-                            Running, HYROX and Spartan racing have become a
-                            regular part of my life. I enjoy the process of
-                            building endurance, testing limits and continuously
-                            improving performance over time.
+                            Endurance sports give me another place to test
+                            limits, build consistency and chase incremental
+                            improvement.
                         </p>
 
                     </article>
 
-                    <article class="beyond-card">
+
+                    <article class="beyond-card reveal">
+
+                        <span class="beyond-number">
+                            02
+                        </span>
 
                         <h3>
                             Automotive
                         </h3>
 
                         <p>
-                            Long-time automotive enthusiast with an interest
-                            in performance cars, engineering, modification,
-                            motorsports culture and the details that make
-                            different platforms unique.
+                            Performance cars, engineering, modification and
+                            the details that make different platforms unique.
                         </p>
 
                     </article>
 
-                    <article class="beyond-card">
+
+                    <article class="beyond-card reveal">
+
+                        <span class="beyond-number">
+                            03
+                        </span>
 
                         <h3>
-                            Building & Exploring
+                            Build / Explore
                         </h3>
 
                         <p>
-                            Outside of traditional work, I enjoy experimenting
-                            with AI-assisted development, animation, digital
-                            products and new technology while continuously
-                            learning how ideas can become real products.
+                            AI, animation, games and experimenting with how
+                            an idea can move from something interesting to
+                            something real.
                         </p>
 
                     </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             CONTACT
+        =================================================== -->
+
+        <section id="contact" class="section contact-section">
+
+            <div class="container">
+
+                <div class="contact-layout">
+
+                    <div class="section-heading reveal">
+
+                        <p class="section-number">
+                            07 / Contact
+                        </p>
+
+                        <h2>
+                            Let's build something useful.
+                        </h2>
+
+                        <p class="section-description">
+                            Open to conversations around quality engineering,
+                            QA, technical roles and development opportunities.
+                        </p>
+
+                    </div>
+
+
+                    <div class="contact-links reveal">
+
+                        <a
+                            href="mailto:marvin_lirio@ymail.com"
+                            class="contact-link"
+                        >
+
+                            <div>
+
+                                <span>
+                                    Email
+                                </span>
+
+                                <strong>
+                                    marvin_lirio@ymail.com
+                                </strong>
+
+                            </div>
+
+                            <span aria-hidden="true">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="https://linkedin.com/in/marvin-lirio-2117ab11a/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="contact-link"
+                        >
+
+                            <div>
+
+                                <span>
+                                    LinkedIn
+                                </span>
+
+                                <strong>
+                                    Professional Profile
+                                </strong>
+
+                            </div>
+
+                            <span aria-hidden="true">
+                                ↗
+                            </span>
+
+                        </a>
+
+
+                        <a
+                            href="https://github.com/marvin-lirio"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="contact-link"
+                        >
+
+                            <div>
+
+                                <span>
+                                    GitHub
+                                </span>
+
+                                <strong>
+                                    @marvin-lirio
+                                </strong>
+
+                            </div>
+
+                            <span aria-hidden="true">
+                                ↗
+                            </span>
+
+                        </a>
+
+                    </div>
 
                 </div>
 
@@ -1172,13 +1787,52 @@
 
     </main>
 
-    <footer>
 
-        <div class="container">
-            © 2026 Marvin Lirio • Built through Keizoku DevOps
+    <!-- ======================================================
+         FOOTER
+    ======================================================= -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-content">
+
+            <div>
+
+                <strong>
+                    Marvin Lirio
+                </strong>
+
+                <span>
+                    Las Vegas, NV
+                </span>
+
+            </div>
+
+
+            <div class="footer-center">
+
+                <span>
+                    Portfolio V2
+                </span>
+
+                <span>
+                    Built through Keizoku DevOps
+                </span>
+
+            </div>
+
+
+            <a href="#top" class="back-to-top">
+                Back to top ↑
+            </a>
+
         </div>
 
     </footer>
 
+
+    <script src="app.js"></script>
+
 </body>
+
 </html>
