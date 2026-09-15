@@ -8,9 +8,10 @@
    2. Mobile navigation
    3. Interactive experience timeline
    4. Role-level View More controls
-   5. Scroll reveal
-   6. Active navigation
-   7. Header scroll state
+   5. Selected Work View More controls
+   6. Scroll reveal
+   7. Active navigation
+   8. Header scroll state
 ============================================================ */
 
 
@@ -79,6 +80,12 @@ const companyDisplay =
 const roleToggles =
     document.querySelectorAll(
         ".role-toggle"
+    );
+
+
+const projectToggles =
+    document.querySelectorAll(
+        ".project-toggle"
     );
 
 
@@ -857,6 +864,101 @@ roleToggles.forEach(
                         "−";
 
                 }
+
+            }
+        );
+
+    }
+);
+
+
+/* ============================================================
+   PROJECT DETAILS
+
+   Selected Work cards use the same expandable pattern:
+
+   - Summary, stack and public links remain visible.
+   - View More expands the additional project details.
+   - Each project opens and closes independently.
+============================================================ */
+
+projectToggles.forEach(
+    (button) => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const project =
+                    button.closest(
+                        ".project-featured"
+                    );
+
+
+                if (!project) {
+                    return;
+                }
+
+
+                const details =
+                    project.querySelector(
+                        ".project-details"
+                    );
+
+
+                const label =
+                    button.querySelector(
+                        ".project-toggle-label"
+                    );
+
+
+                const symbol =
+                    button.querySelector(
+                        ".project-toggle-symbol"
+                    );
+
+
+                if (
+                    !details
+                    ||
+                    !label
+                    ||
+                    !symbol
+                ) {
+                    return;
+                }
+
+
+                const isOpen =
+                    details.classList.contains(
+                        "open"
+                    );
+
+
+                details.classList.toggle(
+                    "open",
+                    !isOpen
+                );
+
+
+                button.setAttribute(
+                    "aria-expanded",
+                    isOpen
+                        ? "false"
+                        : "true"
+                );
+
+
+                label.textContent =
+                    isOpen
+                        ? "View More"
+                        : "View Less";
+
+
+                symbol.textContent =
+                    isOpen
+                        ? "+"
+                        : "−";
 
             }
         );
