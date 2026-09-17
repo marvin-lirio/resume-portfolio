@@ -3098,8 +3098,9 @@ button:focus-visible {
         4px;
 }
 
+
 /* ============================================================
-   CENTERED CONTENT CAROUSELS
+   CENTERED CONTENT CAROUSELS — CURRENT
    Capabilities + Selected Work
 ============================================================ */
 
@@ -3109,6 +3110,8 @@ button:focus-visible {
     align-items: center;
     gap: 20px;
     width: 100%;
+    min-height: 0;
+    height: auto;
 }
 
 .carousel-arrow {
@@ -3145,61 +3148,12 @@ button:focus-visible {
 .horizontal-track {
     position: relative;
     min-width: 0;
+    min-height: 0;
+    height: auto;
     overflow: hidden;
 }
 
-
-/* CAPABILITIES */
-
-.capabilities-grid.horizontal-track {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-    min-height: 445px;
-}
-
-.capabilities-grid.horizontal-track .capability-card {
-    display: none;
-    width: 100%;
-    min-height: 445px;
-    margin: 0;
-}
-
-.capabilities-grid.horizontal-track .capability-card.carousel-active {
-    display: flex;
-    animation: carouselReveal 280ms ease;
-}
-
-
-/* SELECTED WORK */
-
-.projects.horizontal-track {
-    display: block;
-    min-height: 610px;
-}
-
-.projects.horizontal-track > .project-featured {
-    display: none;
-    width: 100%;
-    min-height: 610px;
-    margin: 0;
-}
-
-.projects.horizontal-track > .project-featured.carousel-active {
-    display: block;
-    animation: carouselReveal 280ms ease;
-}
-
-
-/* A project may grow beyond its collapsed carousel height when expanded. */
-
-.projects.horizontal-track > .project-featured.carousel-active:has(.project-details.open) {
-    min-height: 610px;
-}
-
-
 @keyframes carouselReveal {
-
     from {
         opacity: 0;
         transform: translateX(10px);
@@ -3209,14 +3163,9 @@ button:focus-visible {
         opacity: 1;
         transform: translateX(0);
     }
-
 }
 
-
-/* TABLET */
-
 @media (max-width: 1000px) {
-
     .carousel-row {
         grid-template-columns: 48px minmax(0, 1fr) 48px;
         gap: 14px;
@@ -3226,147 +3175,7 @@ button:focus-visible {
         width: 48px;
         height: 48px;
     }
-
 }
-
-
-/* MOBILE */
-
-@media (max-width: 700px) {
-
-    .capabilities-grid.horizontal-track {
-        grid-template-columns: 1fr;
-    }
-
-    .carousel-row {
-        grid-template-columns: 38px minmax(0, 1fr) 38px;
-        gap: 8px;
-    }
-
-    .carousel-arrow {
-        width: 38px;
-        height: 38px;
-        font-size: 0.9rem;
-    }
-
-    .capabilities-grid.horizontal-track,
-    .projects.horizontal-track {
-        min-height: 0;
-    }
-
-    .capabilities-grid.horizontal-track .capability-card,
-    .projects.horizontal-track > .project-featured {
-        min-height: 0;
-    }
-
-}
-
-
-/* ============================================================
-   CAPABILITY CAROUSEL — TWO CARD LAYOUT
-============================================================ */
-
-.capabilities-grid.horizontal-track {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
-    width: 100%;
-    min-height: 555px;
-}
-
-.capabilities-grid.horizontal-track .capability-card {
-    display: none;
-    width: 100%;
-    min-height: 555px;
-    padding: 36px;
-    align-content: initial;
-    justify-content: initial;
-}
-
-.capabilities-grid.horizontal-track .capability-card.carousel-active {
-    display: flex;
-    flex-direction: column;
-}
-
-.capabilities-grid.horizontal-track .capability-card h3 {
-    margin: 128px 0 0;
-    line-height: 1;
-}
-
-.capability-groups {
-    display: grid;
-    gap: 28px;
-    margin-top: 44px;
-}
-
-.capability-group {
-    display: grid;
-    gap: 12px;
-}
-
-.capability-group-label {
-    display: block;
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-}
-
-.capability-group .tag-list {
-    margin: 0;
-}
-
-@media (max-width: 1000px) {
-    .capabilities-grid.horizontal-track {
-        gap: 18px;
-        min-height: 530px;
-    }
-
-    .capabilities-grid.horizontal-track .capability-card {
-        min-height: 530px;
-        padding: 30px;
-    }
-
-    .capabilities-grid.horizontal-track .capability-card h3 {
-        margin-top: 105px;
-    }
-
-    .capability-groups {
-        margin-top: 38px;
-        gap: 24px;
-    }
-}
-
-@media (max-width: 700px) {
-    .capabilities-grid.horizontal-track {
-        display: block;
-        min-height: 0;
-    }
-
-    .capabilities-grid.horizontal-track .capability-card {
-        width: 100%;
-        min-height: 500px;
-        padding: 28px;
-    }
-
-    .capabilities-grid.horizontal-track .capability-card.carousel-active {
-        display: flex;
-    }
-
-    .capabilities-grid.horizontal-track .capability-card h3 {
-        margin-top: 80px;
-    }
-
-    .capability-groups {
-        margin-top: 34px;
-        gap: 22px;
-    }
-}
-
 
 /* ============================================================
    CAPABILITIES — FINAL COMPACT TWO-CARD LAYOUT
@@ -3483,12 +3292,18 @@ button:focus-visible {
 
 /* ============================================================
    SELECTED WORK — COMPACT CAROUSEL
-   Allow project cards to size naturally to their content
+   Natural card height; no phantom carousel space
 ============================================================ */
+
+#work .horizontal-section-shell,
+#work .carousel-row,
+.projects.horizontal-track {
+    min-height: 0;
+    height: auto;
+}
 
 .projects.horizontal-track {
     display: block;
-    min-height: 0;
 }
 
 .projects.horizontal-track > .project-featured {
@@ -3928,14 +3743,12 @@ button:focus-visible {
 }
 
 /* ============================================================
-   BEYOND WORK — CONSISTENT HOVER STATE
+   BEYOND WORK — CONSISTENT DESKTOP HOVER
 ============================================================ */
 
 @media (hover: hover) {
-
-    .beyond-card:last-child:hover {
+    .beyond-card:hover {
+        border-color: var(--accent);
         background: var(--surface);
-        border-color: var(--accent-border);
     }
-
 }
