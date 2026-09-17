@@ -3097,3 +3097,386 @@ button:focus-visible {
     outline-offset:
         4px;
 }
+
+/* ============================================================
+   CENTERED CONTENT CAROUSELS
+   Capabilities + Selected Work
+============================================================ */
+
+.carousel-row {
+    display: grid;
+    grid-template-columns: 54px minmax(0, 1fr) 54px;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.carousel-arrow {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--text-soft);
+    font-size: 1rem;
+    cursor: pointer;
+    transition:
+        border-color var(--transition),
+        background var(--transition),
+        color var(--transition),
+        transform var(--transition);
+}
+
+.carousel-arrow:hover {
+    border-color: var(--accent-border);
+    background: var(--accent-soft);
+    color: var(--accent);
+    transform: scale(1.04);
+}
+
+.carousel-arrow:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+}
+
+.horizontal-track {
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+}
+
+
+/* CAPABILITIES */
+
+.capabilities-grid.horizontal-track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    min-height: 445px;
+}
+
+.capabilities-grid.horizontal-track .capability-card {
+    display: none;
+    width: 100%;
+    min-height: 445px;
+    margin: 0;
+}
+
+.capabilities-grid.horizontal-track .capability-card.carousel-active {
+    display: flex;
+    animation: carouselReveal 280ms ease;
+}
+
+
+/* SELECTED WORK */
+
+.projects.horizontal-track {
+    display: block;
+    min-height: 610px;
+}
+
+.projects.horizontal-track > .project-featured {
+    display: none;
+    width: 100%;
+    min-height: 610px;
+    margin: 0;
+}
+
+.projects.horizontal-track > .project-featured.carousel-active {
+    display: block;
+    animation: carouselReveal 280ms ease;
+}
+
+
+/* A project may grow beyond its collapsed carousel height when expanded. */
+
+.projects.horizontal-track > .project-featured.carousel-active:has(.project-details.open) {
+    min-height: 610px;
+}
+
+
+@keyframes carouselReveal {
+
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+
+/* TABLET */
+
+@media (max-width: 1000px) {
+
+    .carousel-row {
+        grid-template-columns: 48px minmax(0, 1fr) 48px;
+        gap: 14px;
+    }
+
+    .carousel-arrow {
+        width: 48px;
+        height: 48px;
+    }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .capabilities-grid.horizontal-track {
+        grid-template-columns: 1fr;
+    }
+
+    .carousel-row {
+        grid-template-columns: 38px minmax(0, 1fr) 38px;
+        gap: 8px;
+    }
+
+    .carousel-arrow {
+        width: 38px;
+        height: 38px;
+        font-size: 0.9rem;
+    }
+
+    .capabilities-grid.horizontal-track,
+    .projects.horizontal-track {
+        min-height: 0;
+    }
+
+    .capabilities-grid.horizontal-track .capability-card,
+    .projects.horizontal-track > .project-featured {
+        min-height: 0;
+    }
+
+}
+
+
+/* ============================================================
+   CAPABILITY CAROUSEL — TWO CARD LAYOUT
+============================================================ */
+
+.capabilities-grid.horizontal-track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    width: 100%;
+    min-height: 555px;
+}
+
+.capabilities-grid.horizontal-track .capability-card {
+    display: none;
+    width: 100%;
+    min-height: 555px;
+    padding: 36px;
+    align-content: initial;
+    justify-content: initial;
+}
+
+.capabilities-grid.horizontal-track .capability-card.carousel-active {
+    display: flex;
+    flex-direction: column;
+}
+
+.capabilities-grid.horizontal-track .capability-card h3 {
+    margin: 128px 0 0;
+    line-height: 1;
+}
+
+.capability-groups {
+    display: grid;
+    gap: 28px;
+    margin-top: 44px;
+}
+
+.capability-group {
+    display: grid;
+    gap: 12px;
+}
+
+.capability-group-label {
+    display: block;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.capability-group .tag-list {
+    margin: 0;
+}
+
+@media (max-width: 1000px) {
+    .capabilities-grid.horizontal-track {
+        gap: 18px;
+        min-height: 530px;
+    }
+
+    .capabilities-grid.horizontal-track .capability-card {
+        min-height: 530px;
+        padding: 30px;
+    }
+
+    .capabilities-grid.horizontal-track .capability-card h3 {
+        margin-top: 105px;
+    }
+
+    .capability-groups {
+        margin-top: 38px;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 700px) {
+    .capabilities-grid.horizontal-track {
+        display: block;
+        min-height: 0;
+    }
+
+    .capabilities-grid.horizontal-track .capability-card {
+        width: 100%;
+        min-height: 500px;
+        padding: 28px;
+    }
+
+    .capabilities-grid.horizontal-track .capability-card.carousel-active {
+        display: flex;
+    }
+
+    .capabilities-grid.horizontal-track .capability-card h3 {
+        margin-top: 80px;
+    }
+
+    .capability-groups {
+        margin-top: 34px;
+        gap: 22px;
+    }
+}
+
+
+/* ============================================================
+   CAPABILITIES — FINAL COMPACT TWO-CARD LAYOUT
+   Consistent card height + balanced internal spacing
+============================================================ */
+
+.capabilities-grid.horizontal-track {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    min-height: 0;
+    align-items: stretch;
+}
+
+.capabilities-grid.horizontal-track .capability-card {
+    display: none;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+}
+
+.capabilities-grid.horizontal-track .capability-card.carousel-active {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 390px;
+    height: 100%;
+    padding: 34px 38px 38px;
+    animation: carouselReveal 280ms ease;
+}
+
+/* Number + status */
+.capabilities-grid.horizontal-track .capability-top {
+    align-self: start;
+}
+
+/* Main capability content */
+.capabilities-grid.horizontal-track .capability-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-self: stretch;
+    padding-top: 54px;
+}
+
+/* Capability title */
+.capabilities-grid.horizontal-track .capability-card h3 {
+    margin: 0 0 26px;
+}
+
+/* Unified skill list */
+.capabilities-grid.horizontal-track .capability-card > .tag-list,
+.capabilities-grid.horizontal-track .capability-body > .tag-list {
+    margin: 0;
+    align-content: flex-start;
+}
+
+/* Old category wrappers no longer used */
+.capability-groups,
+.capability-group,
+.capability-group-label {
+    display: contents;
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 1000px) {
+
+    .capabilities-grid.horizontal-track {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .capabilities-grid.horizontal-track .capability-card.carousel-active {
+        min-height: 370px;
+        padding: 32px 30px 34px;
+    }
+
+    .capabilities-grid.horizontal-track .capability-body {
+        padding-top: 46px;
+    }
+
+    .capabilities-grid.horizontal-track .capability-card h3 {
+        margin-bottom: 24px;
+    }
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .capabilities-grid.horizontal-track {
+        grid-template-columns: 1fr;
+    }
+
+    .capabilities-grid.horizontal-track .capability-card.carousel-active {
+        min-height: 0;
+        padding: 28px 24px 30px;
+    }
+
+    .capabilities-grid.horizontal-track .capability-body {
+        padding-top: 44px;
+    }
+
+    .capabilities-grid.horizontal-track .capability-card h3 {
+        margin-bottom: 22px;
+    }
+}

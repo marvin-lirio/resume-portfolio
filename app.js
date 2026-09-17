@@ -12,6 +12,7 @@
    6. Scroll reveal
    7. Active navigation
    8. Header scroll state
+   9. Centered carousel navigation
 ============================================================ */
 
 
@@ -700,6 +701,22 @@ careerStops.forEach(
                     ].focus();
 
 
+                    stops.forEach(
+                        (timelineStop) => {
+
+                            timelineStop.tabIndex =
+                                -1;
+
+                        }
+                    );
+
+
+                    stops[
+                        nextIndex
+                    ].tabIndex =
+                        0;
+
+
                     return;
 
                 }
@@ -731,9 +748,6 @@ careerStops.forEach(
 
 /* ============================================================
    INITIAL EXPERIENCE STATE
-
-   The timeline intentionally starts with no company selected
-   and no company display visible.
 ============================================================ */
 
 if (
@@ -762,8 +776,12 @@ if (
 /* ============================================================
    ROLE DETAILS
 
-   Each role independently controls its own expandable
-   job-duty section.
+   Each role expands independently.
+
+   Button text:
+
+   View More +
+   View Less −
 ============================================================ */
 
 roleToggles.forEach(
@@ -875,11 +893,10 @@ roleToggles.forEach(
 /* ============================================================
    PROJECT DETAILS
 
-   Selected Work cards use the same expandable pattern:
+   Selected Work projects use the same expandable interaction
+   pattern as the professional experience roles.
 
-   - Summary, stack and public links remain visible.
-   - View More expands the additional project details.
-   - Each project opens and closes independently.
+   Each project opens and closes independently.
 ============================================================ */
 
 projectToggles.forEach(
@@ -969,6 +986,10 @@ projectToggles.forEach(
 
 /* ============================================================
    SCROLL REVEAL
+
+   Elements using .reveal animate into view once.
+
+   Reduced-motion visitors receive content immediately.
 ============================================================ */
 
 const prefersReducedMotion =
@@ -1046,6 +1067,9 @@ else {
 
 /* ============================================================
    ACTIVE NAVIGATION
+
+   Updates the desktop navigation as the visitor moves
+   through major sections of the page.
 ============================================================ */
 
 const sectionObserver =
@@ -1160,6 +1184,8 @@ updateHeader();
 
 /* ============================================================
    ESCAPE KEY
+
+   Escape closes the mobile menu when open.
 ============================================================ */
 
 document.addEventListener(
@@ -1185,6 +1211,552 @@ document.addEventListener(
                 menuToggle.focus();
 
             }
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   CENTERED CAROUSEL NAVIGATION
+
+   CAPABILITIES
+
+   Desktop / Tablet:
+
+   Page 1:
+   Quality Engineering
+   Systems & Delivery
+
+   Page 2:
+   Compliance & Product
+   Development
+
+   Mobile:
+
+   One capability at a time.
+
+
+   SELECTED WORK
+
+   One project at a time on all screen sizes.
+
+
+   All navigation wraps continuously:
+
+   first ← last
+   last  → first
+============================================================ */
+
+const horizontalTracks =
+    document.querySelectorAll(
+        ".horizontal-track[id]"
+    );
+
+
+/* ============================================================
+   GET CAROUSEL ITEMS
+============================================================ */
+
+function getCarouselItems(track) {
+
+    return Array.from(
+        track.children
+    ).filter(
+        (item) =>
+            item.matches(
+                ".capability-card, .project-featured"
+            )
+    );
+
+}
+
+
+/* ============================================================
+   GET CURRENT INDEX
+============================================================ */
+
+function getCarouselIndex(track) {
+
+    const storedIndex =
+        Number(
+            track.dataset.carouselIndex
+        );
+
+
+    return Number.isInteger(
+        storedIndex
+    )
+        ? storedIndex
+        : 0;
+
+}
+
+
+/* ============================================================
+   GET VISIBLE COUNT
+
+   Capabilities:
+   2 cards above 700px
+   1 card at 700px and below
+
+   Projects:
+   Always 1 card
+============================================================ */
+
+function getCarouselVisibleCount(
+    track
+) {
+
+    const isCapabilities =
+        track.id ===
+        "capabilitiesTrack";
+
+
+    if (
+        isCapabilities
+        &&
+        window.innerWidth > 700
+    ) {
+
+        return 2;
+
+    }
+
+
+    return 1;
+
+}
+
+
+/* ============================================================
+   NORMALIZE CAROUSEL INDEX
+
+   Capabilities on desktop/tablet are treated as two
+   fixed pages rather than a sliding sequence.
+
+   Valid desktop capability indexes:
+
+   0 = Quality Engineering + Systems & Delivery
+   2 = Compliance & Product + Development
+
+   This prevents:
+
+   Systems & Delivery + Compliance & Product
+
+   and prevents all four cards from appearing together.
+============================================================ */
+
+function normalizeCarouselIndex(
+    track,
+    requestedIndex
+) {
+
+    const items =
+        getCarouselItems(
+            track
+        );
+
+
+    if (items.length === 0) {
+        return 0;
+    }
+
+
+    const visibleCount =
+        getCarouselVisibleCount(
+            track
+        );
+
+
+    const isCapabilities =
+        track.id ===
+        "capabilitiesTrack";
+
+
+    if (
+        isCapabilities
+        &&
+        visibleCount === 2
+    ) {
+
+        const pageCount =
+            Math.ceil(
+                items.length / 2
+            );
+
+
+        const requestedPage =
+            Math.floor(
+                requestedIndex / 2
+            );
+
+
+        const normalizedPage =
+            (
+                requestedPage %
+                pageCount +
+                pageCount
+            )
+            %
+            pageCount;
+
+
+        return (
+            normalizedPage * 2
+        );
+
+    }
+
+
+    return (
+        (
+            requestedIndex %
+            items.length
+        )
+        +
+        items.length
+    )
+    %
+    items.length;
+
+}
+
+
+/* ============================================================
+   SHOW CAROUSEL ITEM / PAGE
+============================================================ */
+
+function showCarouselItem(
+    track,
+    index
+) {
+
+    const items =
+        getCarouselItems(
+            track
+        );
+
+
+    if (items.length === 0) {
+        return;
+    }
+
+
+    const visibleCount =
+        getCarouselVisibleCount(
+            track
+        );
+
+
+    const isCapabilities =
+        track.id ===
+        "capabilitiesTrack";
+
+
+    const normalizedIndex =
+        normalizeCarouselIndex(
+            track,
+            index
+        );
+
+
+    track.dataset.carouselIndex =
+        String(
+            normalizedIndex
+        );
+
+
+    items.forEach(
+        (
+            item,
+            itemIndex
+        ) => {
+
+            let isActive =
+                false;
+
+
+            /*
+               Capabilities desktop/tablet:
+
+               Show exactly two cards belonging
+               to the current fixed page.
+            */
+
+            if (
+                isCapabilities
+                &&
+                visibleCount === 2
+            ) {
+
+                isActive =
+                    itemIndex >=
+                        normalizedIndex
+                    &&
+                    itemIndex <
+                        normalizedIndex + 2;
+
+            }
+
+
+            /*
+               Mobile capabilities and all projects:
+
+               Show exactly one card.
+            */
+
+            else {
+
+                isActive =
+                    itemIndex ===
+                    normalizedIndex;
+
+            }
+
+
+            item.classList.toggle(
+                "carousel-active",
+                isActive
+            );
+
+
+            item.setAttribute(
+                "aria-hidden",
+                isActive
+                    ? "false"
+                    : "true"
+            );
+
+        }
+    );
+
+}
+
+
+/* ============================================================
+   MOVE CAROUSEL
+
+   Capabilities desktop/tablet:
+   move 2 cards / 1 page
+
+   Everything else:
+   move 1 card
+============================================================ */
+
+function moveCarousel(
+    track,
+    direction
+) {
+
+    const items =
+        getCarouselItems(
+            track
+        );
+
+
+    if (
+        items.length <= 1
+    ) {
+
+        return;
+
+    }
+
+
+    const currentIndex =
+        getCarouselIndex(
+            track
+        );
+
+
+    const visibleCount =
+        getCarouselVisibleCount(
+            track
+        );
+
+
+    const isCapabilities =
+        track.id ===
+        "capabilitiesTrack";
+
+
+    const step =
+        isCapabilities
+        &&
+        visibleCount === 2
+            ? 2
+            : 1;
+
+
+    showCarouselItem(
+        track,
+        currentIndex +
+        (
+            direction *
+            step
+        )
+    );
+
+}
+
+
+/* ============================================================
+   INITIALIZE CAROUSELS
+============================================================ */
+
+horizontalTracks.forEach(
+    (track) => {
+
+        const previousButton =
+            document.querySelector(
+                `[data-track-prev="${track.id}"]`
+            );
+
+
+        const nextButton =
+            document.querySelector(
+                `[data-track-next="${track.id}"]`
+            );
+
+
+        /*
+           Every carousel starts at its first
+           card / first capability pair.
+        */
+
+        showCarouselItem(
+            track,
+            0
+        );
+
+
+        /* ----------------------------------------------------
+           PREVIOUS
+        ---------------------------------------------------- */
+
+        if (previousButton) {
+
+            previousButton.addEventListener(
+                "click",
+                () => {
+
+                    moveCarousel(
+                        track,
+                        -1
+                    );
+
+                }
+            );
+
+        }
+
+
+        /* ----------------------------------------------------
+           NEXT
+        ---------------------------------------------------- */
+
+        if (nextButton) {
+
+            nextButton.addEventListener(
+                "click",
+                () => {
+
+                    moveCarousel(
+                        track,
+                        1
+                    );
+
+                }
+            );
+
+        }
+
+    }
+);
+
+
+/* ============================================================
+   RESPONSIVE CAROUSEL REFRESH
+
+   If the viewport crosses the 700px breakpoint:
+
+   Desktop/tablet:
+   2 capability cards
+
+   Mobile:
+   1 capability card
+
+   Re-running showCarouselItem ensures inactive cards
+   remain hidden after the layout changes.
+============================================================ */
+
+let previousCarouselMobileState =
+    window.innerWidth <= 700;
+
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        const currentMobileState =
+            window.innerWidth <= 700;
+
+
+        /*
+           Only rebuild the carousel state when crossing
+           the actual capability layout breakpoint.
+
+           Normal resizing within desktop or mobile does
+           not unnecessarily reset the cards.
+        */
+
+        if (
+            currentMobileState !==
+            previousCarouselMobileState
+        ) {
+
+            horizontalTracks.forEach(
+                (track) => {
+
+                    /*
+                       Reset capabilities to the beginning
+                       when changing between 1-card and
+                       2-card layouts.
+
+                       Project position is preserved.
+                    */
+
+                    if (
+                        track.id ===
+                        "capabilitiesTrack"
+                    ) {
+
+                        showCarouselItem(
+                            track,
+                            0
+                        );
+
+                    }
+
+                    else {
+
+                        showCarouselItem(
+                            track,
+                            getCarouselIndex(
+                                track
+                            )
+                        );
+
+                    }
+
+                }
+            );
+
+
+            previousCarouselMobileState =
+                currentMobileState;
 
         }
 
