@@ -1901,7 +1901,6 @@ button {
 }
 
 .project-featured:hover {
-    transform: translateY(-3px);
     border-color: var(--border-strong);
     box-shadow: var(--shadow);
 }
