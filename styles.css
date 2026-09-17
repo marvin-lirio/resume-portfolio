@@ -1,5 +1,5 @@
 /* ============================================================
-   MARVIN LIRIO — PORTFOLIO V2.2
+   MARVIN LIRIO — PORTFOLIO V2.3.3
 ============================================================ */
 
 
@@ -3749,5 +3749,68 @@ button:focus-visible {
     .beyond-card:hover {
         border-color: var(--accent);
         background: var(--surface);
+    }
+}
+
+/* ============================================================
+   BEYOND WORK — MOBILE CLEANUP
+============================================================ */
+
+@media (max-width: 700px) {
+
+    #beyond .section-heading {
+        margin-bottom: 42px;
+    }
+
+    #beyond .beyond-grid {
+        display: block;
+        width: 100%;
+        border-top: 1px solid var(--border);
+    }
+
+    #beyond .beyond-card,
+    #beyond .beyond-card:last-child {
+        display: block;
+        width: 100%;
+        min-height: 0;
+        height: auto;
+
+        padding: 30px 0 32px;
+        margin: 0;
+
+        border: 0;
+        border-right: 0;
+        border-left: 0;
+        border-top: 0;
+        border-bottom: 1px solid var(--border);
+
+        background: transparent;
+    }
+
+    #beyond .beyond-card:last-child {
+        border-bottom: 0;
+    }
+
+    #beyond .beyond-card h3 {
+        margin: 0 0 18px;
+        font-size: clamp(1.35rem, 6vw, 1.65rem);
+        line-height: 1.15;
+    }
+
+    #beyond .beyond-card p {
+        margin: 0;
+        max-width: none;
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+
+    /* Remove desktop hover treatment on touch/mobile */
+    #beyond .beyond-card:hover {
+        border-color: var(--border);
+        background: transparent;
+    }
+
+    #beyond .beyond-card:last-child:hover {
+        border-bottom: 0;
     }
 }
