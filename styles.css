@@ -3579,3 +3579,363 @@ button:focus-visible {
     }
 }
 
+/* ============================================================
+   PORTFOLIO V2.3 — HTML ALIGNMENT + EXPERIENCE REFINEMENT
+   Supports the V2.3 HTML content cleanup.
+============================================================ */
+
+
+/* ============================================================
+   NUMBER-FREE CARD ALIGNMENT
+============================================================ */
+
+/* Capability cards now contain only the experience/building badge
+   in the top row, so align that badge intentionally. */
+.capabilities-grid.horizontal-track .capability-top {
+    justify-content: flex-end;
+}
+
+
+/* ============================================================
+   EXPERIENCE — CLEAR INTERACTIVE COMPANY SELECTORS
+============================================================ */
+
+.career-path {
+    gap: 14px;
+}
+
+.career-line {
+    left: 0;
+    right: 0;
+}
+
+.career-stop {
+    min-height: 158px;
+    padding: 32px 24px 22px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    transition:
+        color var(--transition),
+        transform var(--transition),
+        border-color var(--transition),
+        background var(--transition),
+        box-shadow var(--transition);
+}
+
+.career-stop:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-strong);
+    background: var(--surface);
+}
+
+.career-stop.active {
+    border-color: var(--accent-border);
+    background:
+        linear-gradient(
+            135deg,
+            var(--accent-soft),
+            transparent 75%
+        ),
+        var(--surface);
+}
+
+.career-stop .career-dot {
+    top: -1px;
+    left: 23px;
+}
+
+.career-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    padding-top: 15px;
+    color: var(--muted);
+    font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition:
+        color var(--transition),
+        transform var(--transition);
+}
+
+.career-stop:hover .career-action,
+.career-stop.active .career-action {
+    color: var(--accent);
+}
+
+.career-stop:hover .career-action {
+    transform: translateX(3px);
+}
+
+
+/* ============================================================
+   SELECTED WORK — CLEANER GROUP HIERARCHY
+============================================================ */
+
+#work .section-heading {
+    margin-bottom: 46px;
+}
+
+.work-group-heading {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.work-group-heading .section-number {
+    font-size: 0.8rem;
+}
+
+.work-group-heading > p:last-child {
+    line-height: 1.7;
+}
+
+
+/* ============================================================
+   TABLET EXPERIENCE
+============================================================ */
+
+@media (max-width: 1000px) {
+
+    .career-path {
+        gap: 10px;
+    }
+
+    .career-stop {
+        min-height: 170px;
+        padding: 30px 18px 20px;
+    }
+
+    .career-stop .career-dot {
+        left: 17px;
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE EXPERIENCE
+   The JS build will move .company-display immediately after the
+   active .career-stop. These rules prepare that inline layout.
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .career-path {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin: 12px 0 0;
+        padding: 0;
+        border-left: 0;
+    }
+
+    .career-stop {
+        width: 100%;
+        min-height: 0;
+        padding: 22px 50px 20px 22px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        background: var(--surface);
+    }
+
+    .career-stop:hover {
+        transform: none;
+    }
+
+    .career-stop.active {
+        border-color: var(--accent-border);
+        background:
+            linear-gradient(
+                135deg,
+                var(--accent-soft),
+                transparent 80%
+            ),
+            var(--surface);
+    }
+
+    .career-stop .career-dot {
+        top: 22px;
+        left: auto;
+        right: 22px;
+        width: 11px;
+        height: 11px;
+        border: 0;
+    }
+
+    .career-year {
+        margin-top: 0;
+    }
+
+    .career-stop strong {
+        margin-top: 3px;
+        padding-right: 24px;
+        font-size: 1.02rem;
+    }
+
+    .career-stop small {
+        max-width: 90%;
+        margin-top: 2px;
+        line-height: 1.5;
+    }
+
+    .career-action {
+        margin-top: 14px;
+        padding-top: 0;
+    }
+
+    /*
+       Once app.js moves the shared company display into .career-path,
+       it becomes the next item directly beneath the selected company.
+    */
+    .career-path > .company-display {
+        width: 100%;
+        margin: -2px 0 6px;
+        min-height: 0;
+        border-color: var(--accent-border);
+        box-shadow: none;
+    }
+
+    .career-path > .company-display.has-selection {
+        display: block;
+    }
+
+    .career-path > .company-display .company-card-header {
+        padding: 25px 22px;
+    }
+
+    .career-path > .company-display .company-identity h3 {
+        font-size: clamp(1.65rem, 8vw, 2.35rem);
+    }
+
+    .career-path > .company-display .company-identity > p:last-child {
+        font-size: 0.92rem;
+    }
+
+    .career-path > .company-display .role-summary {
+        padding: 22px;
+    }
+
+    .career-path > .company-display .role-details ul {
+        padding:
+            0 30px
+            26px 40px;
+    }
+
+}
+
+/* ============================================================
+   PORTFOLIO V2.3.1 — BEYOND WORK REFINEMENT
+   Compact, consistent three-column layout with no card numbers.
+============================================================ */
+
+.beyond-grid {
+    min-height: 0;
+    align-items: stretch;
+}
+
+.beyond-card {
+    min-height: 0;
+    padding: 38px 34px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-right: 1px solid var(--border);
+}
+
+.beyond-card:last-child {
+    border-right: 1px solid var(--border);
+}
+
+.beyond-card h3 {
+    margin: 0 0 18px;
+}
+
+.beyond-card p {
+    max-width: 34ch;
+    margin: 0;
+    line-height: 1.7;
+}
+
+
+/* ============================================================
+   FOUNDATION + PROCESS NUMBER RESTORATION
+============================================================ */
+
+.foundation-list div {
+    grid-template-columns: 42px 1fr;
+    gap: 14px;
+}
+
+.process-step h3 {
+    margin-top: 74px;
+}
+
+
+/* ============================================================
+   MOBILE / TABLET BEYOND WORK
+============================================================ */
+
+@media (max-width: 1000px) {
+
+    .beyond-card {
+        padding: 34px 28px 36px;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .beyond-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .beyond-card {
+        padding: 28px 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .beyond-card:first-child {
+        padding-top: 8px;
+    }
+
+    .beyond-card:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+    }
+
+    .beyond-card h3 {
+        margin: 0 0 12px;
+    }
+
+    .beyond-card p {
+        max-width: 42ch;
+    }
+
+    .process-step h3 {
+        margin-top: 58px;
+    }
+
+}
+
+/* ============================================================
+   BEYOND WORK — CONSISTENT HOVER STATE
+============================================================ */
+
+@media (hover: hover) {
+
+    .beyond-card:last-child:hover {
+        background: var(--surface);
+        border-color: var(--accent-border);
+    }
+
+}

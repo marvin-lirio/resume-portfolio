@@ -1,5 +1,5 @@
 /* ============================================================
-   MARVIN LIRIO — PORTFOLIO V2.2
+   MARVIN LIRIO — PORTFOLIO V2.3
    app.js
 
    Handles:
@@ -7,13 +7,14 @@
    1. Theme management
    2. Mobile navigation
    3. Interactive experience timeline
-   4. Role-level View More controls
-   5. Selected Work View More controls
-   6. Scroll reveal
-   7. Active navigation
-   8. Header scroll state
-   9. Centered carousel navigation
-   10. Touch / swipe carousel navigation
+   4. Responsive mobile experience placement
+   5. Role-level View More controls
+   6. Selected Work View More controls
+   7. Scroll reveal
+   8. Active navigation
+   9. Header scroll state
+   10. Centered carousel navigation
+   11. Mobile touch / swipe carousel navigation
 ============================================================ */
 
 
@@ -61,6 +62,12 @@ const mobileNavLinks =
     );
 
 
+const careerPath =
+    document.querySelector(
+        ".career-path"
+    );
+
+
 const careerStops =
     document.querySelectorAll(
         ".career-stop[data-company]"
@@ -101,6 +108,39 @@ const sections =
     document.querySelectorAll(
         "main section[id]"
     );
+
+
+/* ============================================================
+   EXPERIENCE DISPLAY HOME
+
+   The company display begins below the career timeline on
+   desktop/tablet.
+
+   On mobile it is temporarily moved directly beneath the
+   selected company.
+
+   This placeholder lets us return it to its original desktop
+   position whenever the viewport leaves mobile.
+============================================================ */
+
+let companyDisplayHome =
+    null;
+
+
+if (companyDisplay) {
+
+    companyDisplayHome =
+        document.createComment(
+            "company-display-home"
+        );
+
+
+    companyDisplay.parentNode.insertBefore(
+        companyDisplayHome,
+        companyDisplay
+    );
+
+}
 
 
 /* ============================================================
@@ -439,6 +479,120 @@ window.addEventListener(
    EXPERIENCE TIMELINE
 ============================================================ */
 
+
+/* ------------------------------------------------------------
+   GET ACTIVE COMPANY
+------------------------------------------------------------ */
+
+function getActiveCompanyName() {
+
+    const activeStop =
+        Array.from(
+            careerStops
+        ).find(
+            (stop) =>
+                stop.classList.contains(
+                    "active"
+                )
+        );
+
+
+    return activeStop
+        ? activeStop.dataset.company
+        : null;
+
+}
+
+
+/* ------------------------------------------------------------
+   POSITION COMPANY DISPLAY
+
+   Desktop / Tablet:
+   The display sits in its original location below the complete
+   timeline.
+
+   Mobile:
+   The display moves immediately after the selected company.
+------------------------------------------------------------ */
+
+function positionCompanyDisplay(
+    companyName = getActiveCompanyName()
+) {
+
+    if (
+        !companyDisplay
+        ||
+        !companyDisplayHome
+    ) {
+
+        return;
+
+    }
+
+
+    const isMobile =
+        window.innerWidth <=
+        700;
+
+
+    if (
+        isMobile
+        &&
+        companyName
+    ) {
+
+        const selectedStop =
+            Array.from(
+                careerStops
+            ).find(
+                (stop) =>
+                    stop.dataset.company ===
+                    companyName
+            );
+
+
+        if (
+            selectedStop
+            &&
+            selectedStop.parentNode
+        ) {
+
+            selectedStop.insertAdjacentElement(
+                "afterend",
+                companyDisplay
+            );
+
+        }
+
+
+        return;
+
+    }
+
+
+    /*
+       Restore the display immediately after its original
+       placeholder for desktop/tablet.
+    */
+
+    if (
+        companyDisplayHome.parentNode
+    ) {
+
+        companyDisplayHome.parentNode.insertBefore(
+            companyDisplay,
+            companyDisplayHome.nextSibling
+        );
+
+    }
+
+}
+
+
+/* ------------------------------------------------------------
+   CLEAR COMPANY SELECTION
+------------------------------------------------------------ */
+
 function clearCompanySelection() {
 
     careerStops.forEach(
@@ -481,8 +635,22 @@ function clearCompanySelection() {
 
     }
 
+
+    /*
+       If the mobile panel had been moved beneath a company,
+       return it home once the selection is closed.
+    */
+
+    positionCompanyDisplay(
+        null
+    );
+
 }
 
+
+/* ------------------------------------------------------------
+   SELECT COMPANY
+------------------------------------------------------------ */
 
 function selectCompany(companyName) {
 
@@ -532,6 +700,16 @@ function selectCompany(companyName) {
     );
 
 
+    /*
+       Position first so the reveal occurs in the correct
+       location on mobile.
+    */
+
+    positionCompanyDisplay(
+        companyName
+    );
+
+
     if (companyDisplay) {
 
         companyDisplay.classList.add(
@@ -542,6 +720,10 @@ function selectCompany(companyName) {
 
 }
 
+
+/* ------------------------------------------------------------
+   TOGGLE COMPANY
+------------------------------------------------------------ */
 
 function toggleCompany(companyName) {
 
@@ -765,6 +947,49 @@ if (
     );
 
 }
+
+
+/* ============================================================
+   RESPONSIVE EXPERIENCE PLACEMENT
+
+   When crossing the 700px breakpoint:
+
+   Mobile:
+   Move the company display beneath the selected company.
+
+   Desktop/tablet:
+   Restore it beneath the complete timeline.
+============================================================ */
+
+let previousExperienceMobileState =
+    window.innerWidth <=
+    700;
+
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        const currentMobileState =
+            window.innerWidth <=
+            700;
+
+
+        if (
+            currentMobileState !==
+            previousExperienceMobileState
+        ) {
+
+            positionCompanyDisplay();
+
+
+            previousExperienceMobileState =
+                currentMobileState;
+
+        }
+
+    }
+);
 
 
 /* ============================================================
@@ -1530,7 +1755,7 @@ function moveCarousel(
 
    - Previous button
    - Next button
-   - Touch / swipe navigation
+   - Mobile touch / swipe navigation
 ============================================================ */
 
 horizontalTracks.forEach(
@@ -1597,16 +1822,18 @@ horizontalTracks.forEach(
 
 
         /* ----------------------------------------------------
-           TOUCH / SWIPE
+           MOBILE TOUCH / SWIPE
 
            Swipe left  = next
            Swipe right = previous
 
-           A swipe must travel at least 50px and must be
-           clearly more horizontal than vertical.
+           Swipe navigation is enabled only at <= 700px.
 
-           This allows normal vertical page scrolling without
-           accidentally changing carousel cards.
+           Gestures beginning on buttons or links are ignored
+           so View More, project links and other controls remain
+           reliable.
+
+           Vertical scrolling remains available.
         ---------------------------------------------------- */
 
         let touchStartX =
@@ -1617,13 +1844,44 @@ horizontalTracks.forEach(
             0;
 
 
+        let touchStartedOnInteractiveElement =
+            false;
+
+
         track.addEventListener(
             "touchstart",
             (event) => {
 
                 if (
+                    window.innerWidth >
+                    700
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
                     event.touches.length !==
                     1
+                ) {
+
+                    return;
+
+                }
+
+
+                touchStartedOnInteractiveElement =
+                    Boolean(
+                        event.target.closest(
+                            "a, button, input, textarea, select, label"
+                        )
+                    );
+
+
+                if (
+                    touchStartedOnInteractiveElement
                 ) {
 
                     return;
@@ -1649,6 +1907,29 @@ horizontalTracks.forEach(
         track.addEventListener(
             "touchend",
             (event) => {
+
+                if (
+                    window.innerWidth >
+                    700
+                ) {
+
+                    return;
+
+                }
+
+
+                if (
+                    touchStartedOnInteractiveElement
+                ) {
+
+                    touchStartedOnInteractiveElement =
+                        false;
+
+
+                    return;
+
+                }
+
 
                 if (
                     event.changedTouches.length !==
@@ -1708,14 +1989,6 @@ horizontalTracks.forEach(
 
                 }
 
-
-                /*
-                   Finger moves left:
-                   advance carousel.
-
-                   Finger moves right:
-                   move backward.
-                */
 
                 moveCarousel(
                     track,
