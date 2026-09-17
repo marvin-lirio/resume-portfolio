@@ -13,6 +13,7 @@
    7. Active navigation
    8. Header scroll state
    9. Centered carousel navigation
+   10. Touch / swipe carousel navigation
 ============================================================ */
 
 
@@ -436,13 +437,6 @@ window.addEventListener(
 
 /* ============================================================
    EXPERIENCE TIMELINE
-
-   Timeline behavior:
-
-   - Nothing is selected on initial page load.
-   - Selecting a company displays that company.
-   - Selecting the active company again closes it.
-   - Selecting another company switches directly to it.
 ============================================================ */
 
 function clearCompanySelection() {
@@ -775,13 +769,6 @@ if (
 
 /* ============================================================
    ROLE DETAILS
-
-   Each role expands independently.
-
-   Button text:
-
-   View More +
-   View Less −
 ============================================================ */
 
 roleToggles.forEach(
@@ -892,11 +879,6 @@ roleToggles.forEach(
 
 /* ============================================================
    PROJECT DETAILS
-
-   Selected Work projects use the same expandable interaction
-   pattern as the professional experience roles.
-
-   Each project opens and closes independently.
 ============================================================ */
 
 projectToggles.forEach(
@@ -986,10 +968,6 @@ projectToggles.forEach(
 
 /* ============================================================
    SCROLL REVEAL
-
-   Elements using .reveal animate into view once.
-
-   Reduced-motion visitors receive content immediately.
 ============================================================ */
 
 const prefersReducedMotion =
@@ -1067,9 +1045,6 @@ else {
 
 /* ============================================================
    ACTIVE NAVIGATION
-
-   Updates the desktop navigation as the visitor moves
-   through major sections of the page.
 ============================================================ */
 
 const sectionObserver =
@@ -1184,8 +1159,6 @@ updateHeader();
 
 /* ============================================================
    ESCAPE KEY
-
-   Escape closes the mobile menu when open.
 ============================================================ */
 
 document.addEventListener(
@@ -1224,29 +1197,18 @@ document.addEventListener(
    CAPABILITIES
 
    Desktop / Tablet:
-
-   Page 1:
-   Quality Engineering
-   Systems & Delivery
-
-   Page 2:
-   Compliance & Product
-   Development
+   2 cards per page
 
    Mobile:
-
-   One capability at a time.
+   1 capability per page
 
 
    SELECTED WORK
 
-   One project at a time on all screen sizes.
+   1 project per page on all screen sizes.
 
 
-   All navigation wraps continuously:
-
-   first ← last
-   last  → first
+   Navigation wraps continuously.
 ============================================================ */
 
 const horizontalTracks =
@@ -1296,13 +1258,6 @@ function getCarouselIndex(track) {
 
 /* ============================================================
    GET VISIBLE COUNT
-
-   Capabilities:
-   2 cards above 700px
-   1 card at 700px and below
-
-   Projects:
-   Always 1 card
 ============================================================ */
 
 function getCarouselVisibleCount(
@@ -1332,20 +1287,6 @@ function getCarouselVisibleCount(
 
 /* ============================================================
    NORMALIZE CAROUSEL INDEX
-
-   Capabilities on desktop/tablet are treated as two
-   fixed pages rather than a sliding sequence.
-
-   Valid desktop capability indexes:
-
-   0 = Quality Engineering + Systems & Delivery
-   2 = Compliance & Product + Development
-
-   This prevents:
-
-   Systems & Delivery + Compliance & Product
-
-   and prevents all four cards from appearing together.
 ============================================================ */
 
 function normalizeCarouselIndex(
@@ -1478,13 +1419,6 @@ function showCarouselItem(
                 false;
 
 
-            /*
-               Capabilities desktop/tablet:
-
-               Show exactly two cards belonging
-               to the current fixed page.
-            */
-
             if (
                 isCapabilities
                 &&
@@ -1499,13 +1433,6 @@ function showCarouselItem(
                         normalizedIndex + 2;
 
             }
-
-
-            /*
-               Mobile capabilities and all projects:
-
-               Show exactly one card.
-            */
 
             else {
 
@@ -1537,12 +1464,6 @@ function showCarouselItem(
 
 /* ============================================================
    MOVE CAROUSEL
-
-   Capabilities desktop/tablet:
-   move 2 cards / 1 page
-
-   Everything else:
-   move 1 card
 ============================================================ */
 
 function moveCarousel(
@@ -1604,6 +1525,12 @@ function moveCarousel(
 
 /* ============================================================
    INITIALIZE CAROUSELS
+
+   Includes:
+
+   - Previous button
+   - Next button
+   - Touch / swipe navigation
 ============================================================ */
 
 horizontalTracks.forEach(
@@ -1620,11 +1547,6 @@ horizontalTracks.forEach(
                 `[data-track-next="${track.id}"]`
             );
 
-
-        /*
-           Every carousel starts at its first
-           card / first capability pair.
-        */
 
         showCarouselItem(
             track,
@@ -1673,6 +1595,142 @@ horizontalTracks.forEach(
 
         }
 
+
+        /* ----------------------------------------------------
+           TOUCH / SWIPE
+
+           Swipe left  = next
+           Swipe right = previous
+
+           A swipe must travel at least 50px and must be
+           clearly more horizontal than vertical.
+
+           This allows normal vertical page scrolling without
+           accidentally changing carousel cards.
+        ---------------------------------------------------- */
+
+        let touchStartX =
+            0;
+
+
+        let touchStartY =
+            0;
+
+
+        track.addEventListener(
+            "touchstart",
+            (event) => {
+
+                if (
+                    event.touches.length !==
+                    1
+                ) {
+
+                    return;
+
+                }
+
+
+                touchStartX =
+                    event.touches[0].clientX;
+
+
+                touchStartY =
+                    event.touches[0].clientY;
+
+            },
+            {
+                passive:
+                    true
+            }
+        );
+
+
+        track.addEventListener(
+            "touchend",
+            (event) => {
+
+                if (
+                    event.changedTouches.length !==
+                    1
+                ) {
+
+                    return;
+
+                }
+
+
+                const touchEndX =
+                    event.changedTouches[0].clientX;
+
+
+                const touchEndY =
+                    event.changedTouches[0].clientY;
+
+
+                const deltaX =
+                    touchEndX -
+                    touchStartX;
+
+
+                const deltaY =
+                    touchEndY -
+                    touchStartY;
+
+
+                const minimumSwipeDistance =
+                    50;
+
+
+                const isHorizontalSwipe =
+                    Math.abs(
+                        deltaX
+                    )
+                    >=
+                    minimumSwipeDistance
+                    &&
+                    Math.abs(
+                        deltaX
+                    )
+                    >
+                    Math.abs(
+                        deltaY
+                    )
+                    *
+                    1.2;
+
+
+                if (
+                    !isHorizontalSwipe
+                ) {
+
+                    return;
+
+                }
+
+
+                /*
+                   Finger moves left:
+                   advance carousel.
+
+                   Finger moves right:
+                   move backward.
+                */
+
+                moveCarousel(
+                    track,
+                    deltaX < 0
+                        ? 1
+                        : -1
+                );
+
+            },
+            {
+                passive:
+                    true
+            }
+        );
+
     }
 );
 
@@ -1680,20 +1738,18 @@ horizontalTracks.forEach(
 /* ============================================================
    RESPONSIVE CAROUSEL REFRESH
 
-   If the viewport crosses the 700px breakpoint:
-
    Desktop/tablet:
    2 capability cards
 
    Mobile:
    1 capability card
 
-   Re-running showCarouselItem ensures inactive cards
-   remain hidden after the layout changes.
+   Projects remain 1 card at every viewport size.
 ============================================================ */
 
 let previousCarouselMobileState =
-    window.innerWidth <= 700;
+    window.innerWidth <=
+    700;
 
 
 window.addEventListener(
@@ -1701,16 +1757,9 @@ window.addEventListener(
     () => {
 
         const currentMobileState =
-            window.innerWidth <= 700;
+            window.innerWidth <=
+            700;
 
-
-        /*
-           Only rebuild the carousel state when crossing
-           the actual capability layout breakpoint.
-
-           Normal resizing within desktop or mobile does
-           not unnecessarily reset the cards.
-        */
 
         if (
             currentMobileState !==
@@ -1719,14 +1768,6 @@ window.addEventListener(
 
             horizontalTracks.forEach(
                 (track) => {
-
-                    /*
-                       Reset capabilities to the beginning
-                       when changing between 1-card and
-                       2-card layouts.
-
-                       Project position is preserved.
-                    */
 
                     if (
                         track.id ===

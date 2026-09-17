@@ -3511,3 +3511,71 @@ button:focus-visible {
     height: auto;
     min-height: 0;
 }
+
+/* ============================================================
+   MOBILE CAROUSEL REFINEMENT
+   Full-width cards + controls below + touch-friendly layout
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .carousel-row {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 18px 12px;
+        align-items: center;
+    }
+
+    .carousel-row > .horizontal-track {
+        grid-column: 1 / -1;
+        grid-row: 1;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .carousel-row > .carousel-arrow-prev {
+        grid-column: 1;
+        grid-row: 2;
+        justify-self: end;
+    }
+
+    .carousel-row > .carousel-arrow-next {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: start;
+    }
+
+    .carousel-arrow {
+        width: 44px;
+        height: 44px;
+        font-size: 0.95rem;
+    }
+
+    .horizontal-track {
+        touch-action: pan-y;
+    }
+
+    .project-meta {
+        gap: 12px;
+    }
+
+    .project-meta > div {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .project-summary h3 {
+        font-size: clamp(2rem, 10vw, 3.15rem);
+        line-height: 0.98;
+    }
+
+    .project-description {
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+
+    .project-type {
+        line-height: 1.55;
+    }
+}
+
