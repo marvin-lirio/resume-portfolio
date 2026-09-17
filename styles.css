@@ -1,5 +1,5 @@
 /* ============================================================
-   MARVIN LIRIO — PORTFOLIO V2.3.3
+   MARVIN LIRIO — PORTFOLIO V2.3.4
 ============================================================ */
 
 
@@ -3812,5 +3812,100 @@ button:focus-visible {
 
     #beyond .beyond-card:last-child:hover {
         border-bottom: 0;
+    }
+}
+
+/* ============================================================
+   MOBILE — REMOVE STICKY TAP / HOVER STATES
+============================================================ */
+
+@media (max-width: 1000px) {
+
+    /* --------------------------------------------------------
+       HEADER BRAND / ML
+       Safari can retain :hover after tapping the logo.
+    --------------------------------------------------------- */
+
+    .brand,
+    .brand:hover,
+    .brand:focus,
+    .brand:active {
+        color: inherit;
+        background: transparent;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .brand .brand-mark,
+    .brand:hover .brand-mark,
+    .brand:focus .brand-mark,
+    .brand:active .brand-mark {
+        color: var(--text);
+        background: transparent;
+        border-color: var(--border);
+    }
+
+
+    /* --------------------------------------------------------
+       EXPERIENCE COMPANY SELECTORS
+       Neutral state is always restored unless aria-selected=true.
+    --------------------------------------------------------- */
+
+    .career-stop,
+    .career-stop:hover,
+    .career-stop:focus,
+    .career-stop:active {
+        background: transparent;
+        border-color: var(--border);
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .career-stop:hover strong,
+    .career-stop:focus strong,
+    .career-stop:active strong {
+        color: var(--text);
+    }
+
+    .career-stop:hover .career-action,
+    .career-stop:focus .career-action,
+    .career-stop:active .career-action {
+        color: var(--text-muted);
+    }
+
+
+    /* --------------------------------------------------------
+       ACTUAL SELECTED EXPERIENCE STATE
+       This overrides the neutral tap state above.
+    --------------------------------------------------------- */
+
+    .career-stop[aria-selected="true"],
+    .career-stop[aria-selected="true"]:hover,
+    .career-stop[aria-selected="true"]:focus,
+    .career-stop[aria-selected="true"]:active {
+        border-color: var(--accent);
+        background: var(--surface);
+    }
+
+    .career-stop[aria-selected="true"] strong,
+    .career-stop[aria-selected="true"] .career-action {
+        color: var(--accent);
+    }
+}
+
+
+/* Only use hover effects on devices that genuinely support hover */
+@media (hover: hover) and (pointer: fine) {
+
+    .brand:hover .brand-mark {
+        border-color: var(--accent);
+        color: var(--accent);
+    }
+
+    .career-stop:hover {
+        border-color: var(--accent);
+        background: var(--surface);
+    }
+
+    .career-stop:hover .career-action {
+        color: var(--accent);
     }
 }
