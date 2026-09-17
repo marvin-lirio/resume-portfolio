@@ -3480,3 +3480,122 @@ button:focus-visible {
         margin-bottom: 22px;
     }
 }
+
+/* ============================================================
+   SELECTED WORK — FINAL COMPACT CAROUSEL LAYOUT
+   Natural card height with consistent internal spacing
+============================================================ */
+
+.projects.horizontal-track {
+    display: block;
+    min-height: 0;
+}
+
+.projects.horizontal-track > .project-featured {
+    display: none;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+}
+
+.projects.horizontal-track > .project-featured.carousel-active {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    padding-top: 34px;
+    padding-bottom: 34px;
+    animation: carouselReveal 280ms ease;
+}
+
+/* Remove any fixed carousel height when expanded */
+.projects.horizontal-track >
+.project-featured.carousel-active:has(.project-details.open) {
+    height: auto;
+    min-height: 0;
+}
+
+/* Keep the internal sections evenly spaced */
+.projects.horizontal-track
+.project-featured.carousel-active
+.project-meta {
+    margin-bottom: 34px;
+}
+
+.projects.horizontal-track
+.project-featured.carousel-active
+.project-summary {
+    padding-top: 34px;
+    padding-bottom: 34px;
+}
+
+.projects.horizontal-track
+.project-featured.carousel-active
+.project-footer {
+    margin-top: 0;
+    padding-top: 28px;
+    padding-bottom: 0;
+}
+
+
+/* ============================================================
+   TABLET
+============================================================ */
+
+@media (max-width: 1000px) {
+
+    .projects.horizontal-track >
+    .project-featured.carousel-active {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .projects.horizontal-track
+    .project-featured.carousel-active
+    .project-meta {
+        margin-bottom: 30px;
+    }
+
+    .projects.horizontal-track
+    .project-featured.carousel-active
+    .project-summary {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+}
+
+
+/* ============================================================
+   MOBILE
+============================================================ */
+
+@media (max-width: 700px) {
+
+    .projects.horizontal-track >
+    .project-featured.carousel-active {
+        padding-top: 26px;
+        padding-bottom: 26px;
+    }
+
+    .projects.horizontal-track
+    .project-featured.carousel-active
+    .project-meta {
+        margin-bottom: 26px;
+    }
+
+    .projects.horizontal-track
+    .project-featured.carousel-active
+    .project-summary {
+        padding-top: 26px;
+        padding-bottom: 26px;
+    }
+
+    .projects.horizontal-track
+    .project-featured.carousel-active
+    .project-footer {
+        padding-top: 24px;
+    }
+
+}
