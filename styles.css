@@ -1,5 +1,5 @@
 /* ============================================================
-   MARVIN LIRIO — PORTFOLIO V2.3.4
+   MARVIN LIRIO — PORTFOLIO V2.3.5 — CLEAN BASELINE
 ============================================================ */
 
 
@@ -1741,18 +1741,6 @@ button {
 }
 
 
-.capability-number {
-
-    color:
-        var(--muted);
-
-    font-family:
-        "SFMono-Regular",
-        Consolas,
-        monospace;
-
-    font-size: 0.78rem;
-}
 
 
 .experience-badge,
@@ -2264,18 +2252,6 @@ button {
 }
 
 
-.beyond-number {
-
-    color:
-        var(--accent);
-
-    font-family:
-        "SFMono-Regular",
-        Consolas,
-        monospace;
-
-    font-size: 0.75rem;
-}
 
 
 .beyond-card h3 {
