@@ -7898,3 +7898,61 @@ body.light-theme #professionalDeck .dealer-card.is-face-down .dealer-back-seal i
         transform: translate3d(-15%,-15px,0) rotate(18deg);
     }
 }
+
+
+/* ============================================================
+   MOBILE QA — OCT 2026
+   Targeted fixes only. Desktop and 2–5 card deck logic unchanged.
+============================================================ */
+@media (max-width: 700px) {
+    /* The detail panel is inserted directly after its selected stop.
+       Counteract the flex container's 12px gap to join the two panels. */
+    .career-path > .career-stop.active + .company-display.has-selection {
+        margin-top: -13px;
+        border-top: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    /* Mirror the desktop professional layout: rear fan left, front right. */
+    #professionalDeck:not(.is-expanded) .dealer-card.is-face-up,
+    #professionalDeck:not(.is-expanded) .dealer-card.is-face-up.is-dealing {
+        left: 34%;
+        width: min(66%, 290px);
+        transform-origin: 50% 85%;
+        transform: rotate(5deg);
+    }
+    #professionalDeck:not(.is-expanded) .dealer-card.is-face-down,
+    #professionalDeck:not(.is-expanded) .dealer-card.is-face-down.is-dealing,
+    #professionalDeck:not(.is-expanded) .dealer-card.is-face-down:hover {
+        left: 1%;
+        width: 73%;
+        transform-origin: 50% 50%;
+    }
+    /* Keep approved rank-based rotation, with mobile-sized leftward offsets. */
+    #professionalDeck.is-multi-stack:not(.is-expanded) .dealer-card.is-face-down[data-stack-rank="1"] {
+        transform: translate3d(0,0,0) rotate(-9deg);
+    }
+    #professionalDeck.is-multi-stack:not(.is-expanded) .dealer-card.is-face-down[data-stack-rank="2"] {
+        transform: translate3d(-5%,-5px,0) rotate(-12deg);
+    }
+    #professionalDeck.is-multi-stack:not(.is-expanded) .dealer-card.is-face-down[data-stack-rank="3"] {
+        transform: translate3d(-10%,-10px,0) rotate(-15deg);
+    }
+    #professionalDeck.is-multi-stack:not(.is-expanded) .dealer-card.is-face-down[data-stack-rank="4"] {
+        transform: translate3d(-15%,-15px,0) rotate(-18deg);
+    }
+}
+@media (max-width: 420px) {
+    #professionalDeck:not(.is-expanded) .dealer-card.is-face-up,
+    #professionalDeck:not(.is-expanded) .dealer-card.is-face-up.is-dealing {
+        left: 33%;
+        width: 67%;
+    }
+    #professionalDeck:not(.is-expanded) .dealer-card.is-face-down,
+    #professionalDeck:not(.is-expanded) .dealer-card.is-face-down.is-dealing,
+    #professionalDeck:not(.is-expanded) .dealer-card.is-face-down:hover {
+        left: 1%;
+        width: 73%;
+    }
+}
