@@ -3018,3 +3018,25 @@ window.addEventListener(
     );
 
 })();
+
+
+/* V2.9.6: Circuit is page-owned and remains static when interactive cards expand. */
+(() => {
+    const main = document.querySelector('main');
+    const process = document.getElementById('process');
+    if (!main || !process) return;
+    const positionFade = () => {
+        const mainTop = main.getBoundingClientRect().top;
+        const processTop = process.getBoundingClientRect().top - mainTop;
+        const processHeight = process.getBoundingClientRect().height;
+        // Continue throughout Work and into Process, then start fading at 25% of Process and dissolve by its end.
+        const fadeStart = processTop + processHeight * 0.25;
+        const fadeLength = Math.max(400, processHeight * 0.75);
+        main.style.setProperty('--circuit-fade-start', `${Math.round(fadeStart)}px`);
+        main.style.setProperty('--circuit-fade-length', `${Math.round(fadeLength)}px`);
+    };
+    positionFade();
+    window.addEventListener('load', positionFade, { once: true });
+    // Only viewport resizes recalculate; card expansion never does.
+    window.addEventListener('resize', positionFade, { passive: true });
+})();
